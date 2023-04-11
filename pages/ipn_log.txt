@@ -1,0 +1,414 @@
+[07/14/2006 11:56 PM] - SUCCESS!
+IPN POST Vars from Paypal:
+mc_gross=19.50, address_status=confirmed, payer_id=JN7USW8TZ8LW6, tax=0.00, address_street=test address, payment_date=21:56:43 Jul 14, 2006 PDT, payment_status=Completed, charset=windows-1252, address_zip=83990, first_name=Bobby, mc_fee=0.87, address_country_code=US, address_name=Bobby Ball, notify_version=2.1, custom=, payer_status=unverified, business=sales@churchcontent.com, address_country=United States, address_city=somewehr, quantity=1, verify_sign=Ax08gdlP-b4G9PUHDVfvyf8uESnZA0.yJZtRP-yHMMVoyxVOsE4LVFWp, payer_email=bball@yahoo.com, txn_id=4X660943MS9077805, payment_type=instant, last_name=Ball, address_state=WA, receiver_email=sales@churchcontent.com, payment_fee=0.87, receiver_id=9Z4SMA2WYUUL2, txn_type=web_accept, item_name=Standard Plan - 2 extra domains - Monthly - Single Payment, mc_currency=USD, item_number=, residence_country=US, test_ipn=1, payment_gross=19.50, shipping=0.00, 
+IPN Response from Paypal Server:
+ HTTP/1.1 200 OK
+Date: Sat, 15 Jul 2006 04:56:57 GMT
+Server: Apache/1.3.27 (Unix) mod_ssl/2.8.12 OpenSSL/0.9.7a PHP/4.3.2
+Set-Cookie: cookie_check=yes; expires=Tue, 12-Jul-2016 04:56:57 GMT; path=/; domain=.paypal.com
+Set-Cookie: Apache=67.18.70.34.269381152939417308; path=/; expires=Mon, 07-Jul-36 04:56:57 GMT
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+8  
+VERIFIED
+
+
+[07/15/2006 12:00 AM] - SUCCESS!
+IPN POST Vars from Paypal:
+mc_gross=19.50, address_status=confirmed, payer_id=JN7USW8TZ8LW6, tax=0.00, address_street=test address, payment_date=22:00:44 Jul 14, 2006 PDT, payment_status=Completed, charset=windows-1252, address_zip=83990, first_name=Bobby, mc_fee=0.87, address_country_code=US, address_name=Bobby Ball, notify_version=2.1, custom=, payer_status=unverified, business=sales@churchcontent.com, address_country=United States, address_city=somewehr, quantity=1, verify_sign=AAADg6NJYR2dUQn3JdTNJlTgvXKTABIoKmFkiwTyBy7BWTInJVcp3xbT, payer_email=bball@yahoo.com, txn_id=6J790973NB6137302, payment_type=instant, last_name=Ball, address_state=WA, receiver_email=sales@churchcontent.com, payment_fee=0.87, receiver_id=9Z4SMA2WYUUL2, txn_type=web_accept, item_name=Standard Plan - 2 extra domains - Monthly - Single Payment, mc_currency=USD, item_number=, residence_country=US, test_ipn=1, payment_gross=19.50, shipping=0.00, 
+IPN Response from Paypal Server:
+ HTTP/1.1 200 OK
+Date: Sat, 15 Jul 2006 05:00:52 GMT
+Server: Apache/1.3.27 (Unix) mod_ssl/2.8.12 OpenSSL/0.9.7a PHP/4.3.2
+Set-Cookie: cookie_check=yes; expires=Tue, 12-Jul-2016 05:00:52 GMT; path=/; domain=.paypal.com
+Set-Cookie: Apache=67.18.70.34.236631152939652795; path=/; expires=Mon, 07-Jul-36 05:00:52 GMT
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+8  
+VERIFIED
+
+
+[07/15/2006 1:04 AM] - SUCCESS!
+IPN POST Vars from Paypal:
+mc_gross=19.50, address_status=confirmed, payer_id=JN7USW8TZ8LW6, tax=0.00, address_street=test address, payment_date=23:04:05 Jul 14, 2006 PDT, payment_status=Completed, charset=windows-1252, address_zip=83990, first_name=Bobby, mc_fee=0.87, address_country_code=US, address_name=Bobby Ball, notify_version=2.1, custom=, payer_status=unverified, business=sales@churchcontent.com, address_country=United States, address_city=somewehr, quantity=1, verify_sign=AMs8eypFyBAAoduG5t.d7VTwm.IlAUhUmnvK4Gl-mBIoil65dGbXAGhH, payer_email=bball@yahoo.com, txn_id=9JM7988226721660S, payment_type=instant, last_name=Ball, address_state=WA, receiver_email=sales@churchcontent.com, payment_fee=0.87, receiver_id=9Z4SMA2WYUUL2, txn_type=web_accept, item_name=Standard Plan - 2 extra domains - Monthly - Single Payment, mc_currency=USD, item_number=1, residence_country=US, test_ipn=1, payment_gross=19.50, shipping=0.00, 
+IPN Response from Paypal Server:
+ HTTP/1.1 200 OK
+Date: Sat, 15 Jul 2006 06:04:14 GMT
+Server: Apache/1.3.27 (Unix) mod_ssl/2.8.12 OpenSSL/0.9.7a PHP/4.3.2
+Set-Cookie: cookie_check=yes; expires=Tue, 12-Jul-2016 06:04:14 GMT; path=/; domain=.paypal.com
+Set-Cookie: Apache=67.18.70.34.111381152943454610; path=/; expires=Mon, 07-Jul-36 06:04:14 GMT
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+8  
+VERIFIED
+
+
+[07/15/2006 12:21 PM] - SUCCESS!
+IPN POST Vars from Paypal:
+mc_gross=19.50, address_status=confirmed, payer_id=JN7USW8TZ8LW6, tax=0.00, address_street=test address, payment_date=10:21:37 Jul 15, 2006 PDT, payment_status=Completed, charset=windows-1252, address_zip=83990, first_name=Bobby, mc_fee=0.87, address_country_code=US, address_name=Bobby Ball, notify_version=2.1, custom=, payer_status=unverified, business=sales@churchcontent.com, address_country=United States, address_city=somewehr, quantity=1, verify_sign=AtRzUyr29tLUetKXQsSzrgMjoOjdA8gvWWJtsLuKOiIeVon7g0jpBFXt, payer_email=bball@yahoo.com, txn_id=07C594074M120462E, payment_type=instant, last_name=Ball, address_state=WA, receiver_email=sales@churchcontent.com, payment_fee=0.87, receiver_id=9Z4SMA2WYUUL2, txn_type=web_accept, item_name=Standard Plan - 2 extra domains - Monthly - Single Payment, mc_currency=USD, item_number=1 ,1, residence_country=US, test_ipn=1, payment_gross=19.50, shipping=0.00, 
+IPN Response from Paypal Server:
+ HTTP/1.1 200 OK
+Date: Sat, 15 Jul 2006 17:21:54 GMT
+Server: Apache/1.3.27 (Unix) mod_ssl/2.8.12 OpenSSL/0.9.7a PHP/4.3.2
+Set-Cookie: cookie_check=yes; expires=Tue, 12-Jul-2016 17:21:54 GMT; path=/; domain=.paypal.com
+Set-Cookie: Apache=67.18.70.34.132181152984114851; path=/; expires=Mon, 07-Jul-36 17:21:54 GMT
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+8  
+VERIFIED
+
+
+[07/15/2006 12:40 PM] - SUCCESS!
+IPN POST Vars from Paypal:
+mc_gross=19.50, address_status=confirmed, payer_id=JN7USW8TZ8LW6, tax=0.00, address_street=test address, payment_date=10:40:30 Jul 15, 2006 PDT, payment_status=Completed, charset=windows-1252, address_zip=83990, first_name=Bobby, mc_fee=0.87, address_country_code=US, address_name=Bobby Ball, notify_version=2.1, custom=, payer_status=unverified, business=sales@churchcontent.com, address_country=United States, address_city=somewehr, quantity=1, verify_sign=A0OIhZYtcPMZ7M65rvudoLn.jPi4AMgD8p7IE7hApsnVl3ZsNpV8nWrq, payer_email=bball@yahoo.com, txn_id=76U24272C1316711M, payment_type=instant, last_name=Ball, address_state=WA, receiver_email=sales@churchcontent.com, payment_fee=0.87, receiver_id=9Z4SMA2WYUUL2, txn_type=web_accept, item_name=Standard Plan - 2 extra domains - Monthly - Single Payment, mc_currency=USD, item_number=1 ,1, residence_country=US, test_ipn=1, payment_gross=19.50, shipping=0.00, 
+IPN Response from Paypal Server:
+ HTTP/1.1 200 OK
+Date: Sat, 15 Jul 2006 17:40:40 GMT
+Server: Apache/1.3.27 (Unix) mod_ssl/2.8.12 OpenSSL/0.9.7a PHP/4.3.2
+Set-Cookie: cookie_check=yes; expires=Tue, 12-Jul-2016 17:40:40 GMT; path=/; domain=.paypal.com
+Set-Cookie: Apache=67.18.70.34.318321152985240342; path=/; expires=Mon, 07-Jul-36 17:40:40 GMT
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+8  
+VERIFIED
+
+
+[07/15/2006 12:59 PM] - SUCCESS!
+IPN POST Vars from Paypal:
+mc_gross=19.50, address_status=confirmed, payer_id=JN7USW8TZ8LW6, tax=0.00, address_street=test address, payment_date=10:59:17 Jul 15, 2006 PDT, payment_status=Completed, charset=windows-1252, address_zip=83990, first_name=Bobby, mc_fee=0.87, address_country_code=US, address_name=Bobby Ball, notify_version=2.1, custom=, payer_status=unverified, business=sales@churchcontent.com, address_country=United States, address_city=somewehr, quantity=1, verify_sign=APAQn29MYm-UyC3hVEOBpxjyFBSRAimmRdxC3D1nvf1KxNIlRvIB3QbY, payer_email=bball@yahoo.com, txn_id=64H352477T915343T, payment_type=instant, last_name=Ball, address_state=WA, receiver_email=sales@churchcontent.com, payment_fee=0.87, receiver_id=9Z4SMA2WYUUL2, txn_type=web_accept, item_name=Standard Plan - 2 extra domains - Monthly - Single Payment, mc_currency=USD, item_number=1 ,1, residence_country=US, test_ipn=1, payment_gross=19.50, shipping=0.00, 
+IPN Response from Paypal Server:
+ HTTP/1.1 200 OK
+Date: Sat, 15 Jul 2006 17:59:22 GMT
+Server: Apache/1.3.27 (Unix) mod_ssl/2.8.12 OpenSSL/0.9.7a PHP/4.3.2
+Set-Cookie: cookie_check=yes; expires=Tue, 12-Jul-2016 17:59:22 GMT; path=/; domain=.paypal.com
+Set-Cookie: Apache=67.18.70.34.200451152986362795; path=/; expires=Mon, 07-Jul-36 17:59:22 GMT
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+8  
+VERIFIED
+
+
+[07/15/2006 3:16 PM] - SUCCESS!
+IPN POST Vars from Paypal:
+mc_gross=19.50, address_status=confirmed, payer_id=JN7USW8TZ8LW6, tax=0.00, address_street=test address, payment_date=13:16:16 Jul 15, 2006 PDT, payment_status=Completed, charset=windows-1252, address_zip=83990, first_name=Bobby, mc_fee=0.87, address_country_code=US, address_name=Bobby Ball, notify_version=2.1, custom=, payer_status=unverified, business=sales@churchcontent.com, address_country=United States, address_city=somewehr, quantity=1, verify_sign=AcL2Mf3-C.I79laqFPwZDtj3sovFAIKvB5D2zy06eS-yr.yMQwCcvadr, payer_email=bball@yahoo.com, txn_id=3L91538615416623L, payment_type=instant, last_name=Ball, address_state=WA, receiver_email=sales@churchcontent.com, payment_fee=0.87, receiver_id=9Z4SMA2WYUUL2, txn_type=web_accept, item_name=Standard Plan - 2 extra domains - Monthly - Single Payment, mc_currency=USD, item_number=1 ,1, residence_country=US, test_ipn=1, payment_gross=19.50, shipping=0.00, 
+IPN Response from Paypal Server:
+ HTTP/1.1 200 OK
+Date: Sat, 15 Jul 2006 20:16:25 GMT
+Server: Apache/1.3.27 (Unix) mod_ssl/2.8.12 OpenSSL/0.9.7a PHP/4.3.2
+Set-Cookie: cookie_check=yes; expires=Tue, 12-Jul-2016 20:16:25 GMT; path=/; domain=.paypal.com
+Set-Cookie: Apache=67.18.70.34.234381152994585771; path=/; expires=Mon, 07-Jul-36 20:16:25 GMT
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+8  
+VERIFIED
+
+
+[07/15/2006 3:22 PM] - SUCCESS!
+IPN POST Vars from Paypal:
+mc_gross=19.50, address_status=confirmed, payer_id=JN7USW8TZ8LW6, tax=0.00, address_street=test address, payment_date=13:22:42 Jul 15, 2006 PDT, payment_status=Completed, charset=windows-1252, address_zip=83990, first_name=Bobby, mc_fee=0.87, address_country_code=US, address_name=Bobby Ball, notify_version=2.1, custom=, payer_status=unverified, business=sales@churchcontent.com, address_country=United States, address_city=somewehr, quantity=1, verify_sign=Ahnr2ui17.gwmuRJvSp7kXL14Y1.A0DDl39cHy9Ae2wMSjYD77R01bbe, payer_email=bball@yahoo.com, txn_id=9FN18477Y46547314, payment_type=instant, last_name=Ball, address_state=WA, receiver_email=sales@churchcontent.com, payment_fee=0.87, receiver_id=9Z4SMA2WYUUL2, txn_type=web_accept, item_name=Standard Plan - 2 extra domains - Monthly - Single Payment, mc_currency=USD, item_number=1 ,1, residence_country=US, test_ipn=1, payment_gross=19.50, shipping=0.00, 
+IPN Response from Paypal Server:
+ HTTP/1.1 200 OK
+Date: Sat, 15 Jul 2006 20:22:48 GMT
+Server: Apache/1.3.27 (Unix) mod_ssl/2.8.12 OpenSSL/0.9.7a PHP/4.3.2
+Set-Cookie: cookie_check=yes; expires=Tue, 12-Jul-2016 20:22:48 GMT; path=/; domain=.paypal.com
+Set-Cookie: Apache=67.18.70.34.306971152994968467; path=/; expires=Mon, 07-Jul-36 20:22:48 GMT
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+8  
+VERIFIED
+
+
+[07/15/2006 7:45 PM] - SUCCESS!
+IPN POST Vars from Paypal:
+mc_gross=19.50, address_status=confirmed, payer_id=JN7USW8TZ8LW6, tax=0.00, address_street=test address, payment_date=17:45:20 Jul 15, 2006 PDT, payment_status=Completed, charset=windows-1252, address_zip=83990, first_name=Bobby, mc_fee=0.87, address_country_code=US, address_name=Bobby Ball, notify_version=2.1, custom=, payer_status=unverified, business=sales@churchcontent.com, address_country=United States, address_city=somewehr, quantity=1, verify_sign=An5ns1Kso7MWUdW4ErQKJJJ4qi4-AHKXHP7NIi6Uk4PgRFzmsmtwliU4, payer_email=bball@yahoo.com, txn_id=5EE24950WH6314844, payment_type=instant, last_name=Ball, address_state=WA, receiver_email=sales@churchcontent.com, payment_fee=0.87, receiver_id=9Z4SMA2WYUUL2, txn_type=web_accept, item_name=Standard Plan - 2 extra domains - Monthly - Single Payment, mc_currency=USD, item_number=1 ,9, residence_country=US, test_ipn=1, payment_gross=19.50, shipping=0.00, 
+IPN Response from Paypal Server:
+ HTTP/1.1 200 OK
+Date: Sun, 16 Jul 2006 00:45:34 GMT
+Server: Apache/1.3.27 (Unix) mod_ssl/2.8.12 OpenSSL/0.9.7a PHP/4.3.2
+Set-Cookie: cookie_check=yes; expires=Wed, 13-Jul-2016 00:45:34 GMT; path=/; domain=.paypal.com
+Set-Cookie: Apache=67.18.70.34.289331153010734458; path=/; expires=Tue, 08-Jul-36 00:45:34 GMT
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+8  
+VERIFIED
+
+
+[07/15/2006 8:27 PM] - SUCCESS!
+IPN POST Vars from Paypal:
+mc_gross=19.50, address_status=confirmed, payer_id=JN7USW8TZ8LW6, tax=0.00, address_street=test address, payment_date=18:27:20 Jul 15, 2006 PDT, payment_status=Completed, charset=windows-1252, address_zip=83990, first_name=Bobby, mc_fee=0.87, address_country_code=US, address_name=Bobby Ball, notify_version=2.1, custom=, payer_status=unverified, business=sales@churchcontent.com, address_country=United States, address_city=somewehr, quantity=1, verify_sign=AFcWxV21C7fd0v3bYYYRCpSSRl31Ax0RrrUxj0KfE7.P8r4-ui4ZtHXi, payer_email=bball@yahoo.com, txn_id=6AU863228K859452S, payment_type=instant, last_name=Ball, address_state=WA, receiver_email=sales@churchcontent.com, payment_fee=0.87, receiver_id=9Z4SMA2WYUUL2, txn_type=web_accept, item_name=Standard Plan - 2 extra domains - Monthly - Single Payment, mc_currency=USD, item_number=1 ,7, residence_country=US, test_ipn=1, payment_gross=19.50, shipping=0.00, 
+IPN Response from Paypal Server:
+ HTTP/1.1 200 OK
+Date: Sun, 16 Jul 2006 01:27:26 GMT
+Server: Apache/1.3.27 (Unix) mod_ssl/2.8.12 OpenSSL/0.9.7a PHP/4.3.2
+Set-Cookie: cookie_check=yes; expires=Wed, 13-Jul-2016 01:27:27 GMT; path=/; domain=.paypal.com
+Set-Cookie: Apache=67.18.70.34.304451153013246931; path=/; expires=Tue, 08-Jul-36 01:27:26 GMT
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+8  
+VERIFIED
+
+
+[07/15/2006 8:29 PM] - SUCCESS!
+IPN POST Vars from Paypal:
+mc_gross=19.50, address_status=confirmed, payer_id=JN7USW8TZ8LW6, tax=0.00, address_street=test address, payment_date=18:29:18 Jul 15, 2006 PDT, payment_status=Completed, charset=windows-1252, address_zip=83990, first_name=Bobby, mc_fee=0.87, address_country_code=US, address_name=Bobby Ball, notify_version=2.1, custom=, payer_status=unverified, business=sales@churchcontent.com, address_country=United States, address_city=somewehr, quantity=1, verify_sign=Ad.haXmELjNKXYlx7L3aQVinLNNaAHk5hCjkOhMU1TdlIn3VWhs3mwPg, payer_email=bball@yahoo.com, txn_id=50188279W0599042S, payment_type=instant, last_name=Ball, address_state=WA, receiver_email=sales@churchcontent.com, payment_fee=0.87, receiver_id=9Z4SMA2WYUUL2, txn_type=web_accept, item_name=Standard Plan - 2 extra domains - Monthly - Single Payment, mc_currency=USD, item_number=1 ,11, residence_country=US, test_ipn=1, payment_gross=19.50, shipping=0.00, 
+IPN Response from Paypal Server:
+ HTTP/1.1 200 OK
+Date: Sun, 16 Jul 2006 01:29:26 GMT
+Server: Apache/1.3.27 (Unix) mod_ssl/2.8.12 OpenSSL/0.9.7a PHP/4.3.2
+Set-Cookie: cookie_check=yes; expires=Wed, 13-Jul-2016 01:29:26 GMT; path=/; domain=.paypal.com
+Set-Cookie: Apache=67.18.70.34.90451153013366208; path=/; expires=Tue, 08-Jul-36 01:29:26 GMT
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+8  
+VERIFIED
+
+
+[07/15/2006 8:31 PM] - SUCCESS!
+IPN POST Vars from Paypal:
+mc_gross=19.50, address_status=confirmed, payer_id=JN7USW8TZ8LW6, tax=0.00, address_street=test address, payment_date=18:31:22 Jul 15, 2006 PDT, payment_status=Completed, charset=windows-1252, address_zip=83990, first_name=Bobby, mc_fee=0.87, address_country_code=US, address_name=Bobby Ball, notify_version=2.1, custom=, payer_status=unverified, business=sales@churchcontent.com, address_country=United States, address_city=somewehr, quantity=1, verify_sign=AjufHE98Tx6HOSbqkLoFYt1xNOIxAAXsAMybFEUW1O-9zBtnN6I9R8VO, payer_email=bball@yahoo.com, txn_id=3S738359JK2619801, payment_type=instant, last_name=Ball, address_state=WA, receiver_email=sales@churchcontent.com, payment_fee=0.87, receiver_id=9Z4SMA2WYUUL2, txn_type=web_accept, item_name=Standard Plan - 2 extra domains - Monthly - Single Payment, mc_currency=USD, item_number=1 ,12, residence_country=US, test_ipn=1, payment_gross=19.50, shipping=0.00, 
+IPN Response from Paypal Server:
+ HTTP/1.1 200 OK
+Date: Sun, 16 Jul 2006 01:31:30 GMT
+Server: Apache/1.3.27 (Unix) mod_ssl/2.8.12 OpenSSL/0.9.7a PHP/4.3.2
+Set-Cookie: cookie_check=yes; expires=Wed, 13-Jul-2016 01:31:30 GMT; path=/; domain=.paypal.com
+Set-Cookie: Apache=67.18.70.34.195511153013490769; path=/; expires=Tue, 08-Jul-36 01:31:30 GMT
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+8  
+VERIFIED
+
+
+[07/15/2006 8:33 PM] - SUCCESS!
+IPN POST Vars from Paypal:
+mc_gross=19.50, address_status=confirmed, payer_id=JN7USW8TZ8LW6, tax=0.00, address_street=test address, payment_date=18:32:52 Jul 15, 2006 PDT, payment_status=Completed, charset=windows-1252, address_zip=83990, first_name=Bobby, mc_fee=0.87, address_country_code=US, address_name=Bobby Ball, notify_version=2.1, custom=, payer_status=unverified, business=sales@churchcontent.com, address_country=United States, address_city=somewehr, quantity=1, verify_sign=AhGZtz8-GfzcRWuq2xqO5rGANdf0AgYPIQ9ZLeyjv-hEGGegraesAT.s, payer_email=bball@yahoo.com, txn_id=5TV00121KC1668600, payment_type=instant, last_name=Ball, address_state=WA, receiver_email=sales@churchcontent.com, payment_fee=0.87, receiver_id=9Z4SMA2WYUUL2, txn_type=web_accept, item_name=Standard Plan - 2 extra domains - Monthly - Single Payment, mc_currency=USD, item_number=1 ,8, residence_country=US, test_ipn=1, payment_gross=19.50, shipping=0.00, 
+IPN Response from Paypal Server:
+ HTTP/1.1 200 OK
+Date: Sun, 16 Jul 2006 01:33:00 GMT
+Server: Apache/1.3.27 (Unix) mod_ssl/2.8.12 OpenSSL/0.9.7a PHP/4.3.2
+Set-Cookie: cookie_check=yes; expires=Wed, 13-Jul-2016 01:33:00 GMT; path=/; domain=.paypal.com
+Set-Cookie: Apache=67.18.70.34.284181153013580819; path=/; expires=Tue, 08-Jul-36 01:33:00 GMT
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+8  
+VERIFIED
+
+
+[07/26/2006 11:11 AM] - SUCCESS!
+IPN POST Vars from Paypal:
+txn_type=subscr_payment, payment_date=09:11:40 Jul 26, 2006 PDT, subscr_id=S-53D86223KN916151U, last_name=Ball, residence_country=US, pending_reason=address, item_name=Standard Plan - 2 extra domains - Monthly - Subscription, payment_gross=19.50, mc_currency=USD, business=sales@churchcontent.com, payment_type=instant, verify_sign=AQFNQ6s7Zex.TA10kDTVJNj9zZZ7AeTZJAFvwKwyM6V9QcPNeYFH1xDd, payer_status=verified, payer_email=olymbc@yahoo.com, txn_id=3XS41484BH2492628, receiver_email=sales@churchcontent.com, first_name=Bobby, payer_id=TWVV5TRATDSSG, receiver_id=87X2QDABMVSWL, item_number=2, payment_status=Pending, mc_gross=19.50, charset=windows-1252, notify_version=2.1, 
+IPN Response from Paypal Server:
+ HTTP/1.1 200 OK
+Date: Wed, 26 Jul 2006 16:11:42 GMT
+Server: Apache/1.3.33 (Unix) mod_gzip/1.3.26.1a mod_ssl/2.8.22 OpenSSL/0.9.7e
+Set-Cookie: sc_lucky_value=5741A11B; path=/; domain=.paypal.com
+Set-Cookie: cookie_check=yes; expires=Sat, 23-Jul-2016 16:11:42 GMT; path=/; domain=.paypal.com
+Set-Cookie: Apache=67.18.70.34.109681153930302528; path=/; expires=Fri, 18-Jul-36 16:11:42 GMT
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+8  
+VERIFIED
+0
+
+
+
+[07/26/2006 11:11 AM] - SUCCESS!
+IPN POST Vars from Paypal:
+txn_type=subscr_signup, subscr_id=S-53D86223KN916151U, last_name=Ball, residence_country=US, mc_currency=USD, item_name=Standard Plan - 2 extra domains - Monthly - Subscription, amount3=19.50, recurring=1, verify_sign=A3ISabeeqSrp18jk7m0xKloCm6RAAgtlWs2p8z.M9C9wIzudCE1IBCjs, payer_status=verified, payer_email=olymbc@yahoo.com, first_name=Bobby, receiver_email=sales@churchcontent.com, payer_id=TWVV5TRATDSSG, reattempt=1, item_number=2, subscr_date=09:11:38 Jul 26, 2006 PDT, charset=windows-1252, notify_version=2.1, period3=1 M, mc_amount3=19.50, 
+IPN Response from Paypal Server:
+ HTTP/1.1 200 OK
+Date: Wed, 26 Jul 2006 16:11:43 GMT
+Server: Apache/1.3.33 (Unix) mod_gzip/1.3.26.1a mod_ssl/2.8.22 OpenSSL/0.9.7e
+Set-Cookie: sc_lucky_value=945C4138; path=/; domain=.paypal.com
+Set-Cookie: cookie_check=yes; expires=Sat, 23-Jul-2016 16:11:43 GMT; path=/; domain=.paypal.com
+Set-Cookie: Apache=67.18.70.34.214191153930303244; path=/; expires=Fri, 18-Jul-36 16:11:43 GMT
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+8  
+VERIFIED
+0
+
+
+
+[07/28/2006 8:09 PM] - SUCCESS!
+IPN POST Vars from Paypal:
+payment_date=09:11:40 Jul 26, 2006 PDT, txn_type=subscr_payment, subscr_id=S-53D86223KN916151U, last_name=Ball, residence_country=US, item_name=Standard Plan - 2 extra domains - Monthly - Subscription, payment_gross=19.50, mc_currency=USD, business=sales@churchcontent.com, payment_type=instant, verify_sign=AynlJ2zsmflH.74VEfIBZZJsEArxA9o-Tcg9cxJe8YtapJSxSPG4UB8A, payer_status=verified, payer_email=olymbc@yahoo.com, txn_id=3XS41484BH2492628, receiver_email=sales@churchcontent.com, first_name=Bobby, payer_id=TWVV5TRATDSSG, receiver_id=87X2QDABMVSWL, item_number=2, payment_status=Completed, payment_fee=0.87, mc_fee=0.87, mc_gross=19.50, charset=windows-1252, notify_version=2.1, 
+IPN Response from Paypal Server:
+ HTTP/1.1 200 OK
+Date: Sat, 29 Jul 2006 01:09:07 GMT
+Server: Apache/1.3.33 (Unix) mod_gzip/1.3.26.1a mod_ssl/2.8.22 OpenSSL/0.9.7e
+Set-Cookie: sc_lucky_value=041F0078; path=/; domain=.paypal.com
+Set-Cookie: cookie_check=yes; expires=Tue, 26-Jul-2016 01:09:07 GMT; path=/; domain=.paypal.com
+Set-Cookie: Apache=67.18.70.34.113151154135347238; path=/; expires=Mon, 21-Jul-36 01:09:07 GMT
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+8  
+VERIFIED
+0
+
+
+
+[08/15/2006 11:56 PM] - SUCCESS!
+IPN POST Vars from Paypal:
+txn_type=web_accept, payment_date=21:55:51 Aug 15, 2006 PDT, last_name=Wood, residence_country=US, pending_reason=address, item_name=Standard Plan - Monthly - Single Payment, payment_gross=17.50, mc_currency=USD, business=sales@churchcontent.com, payment_type=instant, verify_sign=ADmhMw5gqASpvy.X38.nDdwooKz7AHp5J4GSR1mR8Yx2ugNqyT-4V3aG, payer_status=verified, tax=0.00, payer_email=cjwoodfamily@hotmail.com, txn_id=9EK88715FK798381B, quantity=1, receiver_email=sales@churchcontent.com, first_name=Caleb, payer_id=XQ9594SYJTXAA, receiver_id=87X2QDABMVSWL, item_number=1 ,15, payment_status=Pending, shipping=0.00, mc_gross=17.50, custom=, charset=windows-1252, notify_version=2.1, 
+IPN Response from Paypal Server:
+ HTTP/1.1 200 OK
+Date: Wed, 16 Aug 2006 04:56:00 GMT
+Server: Apache/1.3.33 (Unix) mod_gzip/1.3.26.1a mod_ssl/2.8.22 OpenSSL/0.9.7e
+Set-Cookie: cookie_check=yes; expires=Sat, 13-Aug-2016 04:56:00 GMT; path=/; domain=.paypal.com
+Set-Cookie: Apache=67.18.70.34.228721155704160554; path=/; expires=Fri, 08-Aug-36 04:56:00 GMT
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+8  
+VERIFIED
+0
+
+
+
+[08/17/2006 10:18 PM] - SUCCESS!
+IPN POST Vars from Paypal:
+payment_date=21:55:51 Aug 15, 2006 PDT, txn_type=web_accept, last_name=Wood, residence_country=US, item_name=Standard Plan - Monthly - Single Payment, payment_gross=17.50, mc_currency=USD, business=sales@churchcontent.com, payment_type=instant, verify_sign=AWYxjS6LEFCeGqJDu35ZiF0NsD2FAQo7F-89mNnIhvDvZC8BxyxrUAkh, payer_status=verified, tax=0.00, payer_email=cjwoodfamily@hotmail.com, txn_id=9EK88715FK798381B, quantity=1, receiver_email=sales@churchcontent.com, first_name=Caleb, payer_id=XQ9594SYJTXAA, receiver_id=87X2QDABMVSWL, item_number=1 ,15, payment_status=Completed, payment_fee=0.81, mc_fee=0.81, shipping=0.00, mc_gross=17.50, custom=, charset=windows-1252, notify_version=2.1, 
+IPN Response from Paypal Server:
+ HTTP/1.1 200 OK
+Date: Fri, 18 Aug 2006 03:18:45 GMT
+Server: Apache/1.3.33 (Unix) mod_gzip/1.3.26.1a mod_ssl/2.8.22 OpenSSL/0.9.7e
+Set-Cookie: cookie_check=yes; expires=Mon, 15-Aug-2016 03:18:45 GMT; path=/; domain=.paypal.com
+Set-Cookie: Apache=67.18.70.34.146011155871125464; path=/; expires=Sun, 10-Aug-36 03:18:45 GMT
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+8  
+VERIFIED
+0
+
+
+
+[08/26/2006 5:42 AM] - SUCCESS!
+IPN POST Vars from Paypal:
+txn_type=subscr_payment, payment_date=03:42:18 Aug 26, 2006 PDT, subscr_id=S-53D86223KN916151U, last_name=Ball, residence_country=US, pending_reason=address, item_name=Standard Plan - 2 extra domains - Monthly - Subscription, payment_gross=19.50, mc_currency=USD, business=sales@churchcontent.com, payment_type=instant, verify_sign=A81RC3ayuQ-62d3sxiNEd3E5YJZ4AHMQcjpQNuKIPig87pe2FxADDfH-, payer_status=verified, payer_email=olymbc@yahoo.com, txn_id=11D28925YW566160U, receiver_email=sales@churchcontent.com, first_name=Bobby, payer_id=TWVV5TRATDSSG, receiver_id=87X2QDABMVSWL, item_number=2, payment_status=Pending, mc_gross=19.50, charset=windows-1252, notify_version=2.1, 
+IPN Response from Paypal Server:
+ HTTP/1.1 200 OK
+Date: Sat, 26 Aug 2006 10:42:25 GMT
+Server: Apache/1.3.33 (Unix) mod_gzip/1.3.26.1a mod_ssl/2.8.22 OpenSSL/0.9.7e
+Set-Cookie: cookie_check=yes; expires=Tue, 23-Aug-2016 10:42:25 GMT; path=/; domain=.paypal.com
+Set-Cookie: Apache=67.18.70.34.40691156588945269; path=/; expires=Mon, 18-Aug-36 10:42:25 GMT
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+8  
+VERIFIED
+0
+
+
+
+[08/27/2006 9:13 AM] - SUCCESS!
+IPN POST Vars from Paypal:
+payment_date=03:42:18 Aug 26, 2006 PDT, txn_type=subscr_payment, subscr_id=S-53D86223KN916151U, last_name=Ball, residence_country=US, item_name=Standard Plan - 2 extra domains - Monthly - Subscription, payment_gross=19.50, mc_currency=USD, business=sales@churchcontent.com, payment_type=instant, verify_sign=AKpwhnm.0CuOao3nIxor591EXVoBADrKsK2.oE-CEEPm87lz8FTArY3e, payer_status=verified, payer_email=olymbc@yahoo.com, txn_id=11D28925YW566160U, receiver_email=sales@churchcontent.com, first_name=Bobby, payer_id=TWVV5TRATDSSG, receiver_id=87X2QDABMVSWL, item_number=2, payment_status=Completed, payment_fee=0.87, mc_fee=0.87, mc_gross=19.50, charset=windows-1252, notify_version=2.1, 
+IPN Response from Paypal Server:
+ HTTP/1.1 200 OK
+Date: Sun, 27 Aug 2006 14:13:44 GMT
+Server: Apache/1.3.33 (Unix) mod_gzip/1.3.26.1a mod_ssl/2.8.22 OpenSSL/0.9.7e
+Set-Cookie: cookie_check=yes; expires=Wed, 24-Aug-2016 14:13:44 GMT; path=/; domain=.paypal.com
+Set-Cookie: Apache=67.18.70.34.77711156688024376; path=/; expires=Tue, 19-Aug-36 14:13:44 GMT
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+8  
+VERIFIED
+0
+
+
+
+[08/30/2006 1:15 PM] - SUCCESS!
+IPN POST Vars from Paypal:
+mc_gross=17.50, address_status=unconfirmed, payer_id=XQ9594SYJTXAA, tax=0.00, address_street=409 Pleasant PL, payment_date=11:15:45 Aug 30, 2006 PDT, payment_status=Pending, charset=windows-1252, address_zip=83843, first_name=Caleb, address_country_code=US, address_name=Caleb Wood, notify_version=2.1, custom=, payer_status=verified, business=sales@churchcontent.com, address_country=United States, address_city=Moscow, quantity=1, verify_sign=AiFsXLh2pjLIHkEnV41Z6MM31FTJAVa3c8R7c4.YJCSo8FsiZ0Qwo7Cz, payer_email=cjwoodfamily@hotmail.com, txn_id=6T387949SU655420M, payment_type=instant, last_name=Wood, address_state=ID, receiver_email=sales@churchcontent.com, receiver_id=87X2QDABMVSWL, pending_reason=address, txn_type=web_accept, item_name=Standard Plan - Monthly - Single Payment, mc_currency=USD, item_number=1 ,17, residence_country=US, payment_gross=17.50, shipping=0.00, 
+IPN Response from Paypal Server:
+ HTTP/1.1 200 OK
+Date: Wed, 30 Aug 2006 18:15:54 GMT
+Server: Apache/1.3.33 (Unix) mod_gzip/1.3.26.1a mod_ssl/2.8.22 OpenSSL/0.9.7e
+Set-Cookie: cookie_check=yes; expires=Sat, 27-Aug-2016 18:15:55 GMT; path=/; domain=.paypal.com
+Set-Cookie: Apache=67.18.70.34.46291156961754937; path=/; expires=Fri, 22-Aug-36 18:15:54 GMT
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+8  
+VERIFIED
+0
+
+
+
+[08/30/2006 1:24 PM] - SUCCESS!
+IPN POST Vars from Paypal:
+mc_gross=17.50, address_status=unconfirmed, payer_id=XQ9594SYJTXAA, tax=0.00, address_street=409 Pleasant PL, payment_date=11:15:45 Aug 30, 2006 PDT, payment_status=Completed, charset=windows-1252, address_zip=83843, first_name=Caleb, mc_fee=0.81, address_country_code=US, address_name=Caleb Wood, notify_version=2.1, custom=, payer_status=verified, business=sales@churchcontent.com, address_country=United States, address_city=Moscow, quantity=1, verify_sign=Ar.E9l8zQlEGwTdBml9pI5WtERUoAONknJuC0e2w.74SeDWkWVhF53mg, payer_email=cjwoodfamily@hotmail.com, txn_id=6T387949SU655420M, payment_type=instant, last_name=Wood, address_state=ID, receiver_email=sales@churchcontent.com, payment_fee=0.81, receiver_id=87X2QDABMVSWL, txn_type=web_accept, item_name=Standard Plan - Monthly - Single Payment, mc_currency=USD, item_number=1 ,17, residence_country=US, payment_gross=17.50, shipping=0.00, 
+IPN Response from Paypal Server:
+ HTTP/1.1 200 OK
+Date: Wed, 30 Aug 2006 18:24:02 GMT
+Server: Apache/1.3.33 (Unix) mod_gzip/1.3.26.1a mod_ssl/2.8.22 OpenSSL/0.9.7e
+Set-Cookie: cookie_check=yes; expires=Sat, 27-Aug-2016 18:24:03 GMT; path=/; domain=.paypal.com
+Set-Cookie: Apache=67.18.70.34.92631156962242910; path=/; expires=Fri, 22-Aug-36 18:24:02 GMT
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+8  
+VERIFIED
+0
+
+
+
+[09/26/2006 5:49 AM] - SUCCESS!
+IPN POST Vars from Paypal:
+payment_date=03:48:58 Sep 26, 2006 PDT, txn_type=subscr_payment, subscr_id=S-53D86223KN916151U, last_name=Ball, residence_country=US, item_name=Standard Plan - 2 extra domains - Monthly - Subscription, payment_gross=19.50, mc_currency=USD, business=sales@churchcontent.com, payment_type=instant, verify_sign=A5t1pjn7.KaMUvGzC4jvmMNslA7QAGGYLpQkjWssjvHfHpGAuP2EBbIN, payer_status=verified, payer_email=olymbc@yahoo.com, txn_id=1TW428740A376943G, receiver_email=sales@churchcontent.com, first_name=Bobby, payer_id=TWVV5TRATDSSG, receiver_id=87X2QDABMVSWL, item_number=2, payment_status=Completed, payment_fee=0.87, mc_fee=0.87, mc_gross=19.50, charset=windows-1252, notify_version=2.1, 
+IPN Response from Paypal Server:
+ HTTP/1.1 200 OK
+Date: Tue, 26 Sep 2006 10:49:13 GMT
+Server: Apache/1.3.33 (Unix) mod_gzip/1.3.26.1a mod_ssl/2.8.22 OpenSSL/0.9.7e
+Set-Cookie: cookie_check=yes; expires=Fri, 23-Sep-2016 10:49:14 GMT; path=/; domain=.paypal.com
+Set-Cookie: Apache=67.18.70.34.303331159267753909; path=/; expires=Thu, 18-Sep-36 10:49:13 GMT
+Connection: close
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+8  
+VERIFIED
+0
+
+
+

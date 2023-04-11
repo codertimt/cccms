@@ -1,0 +1,800 @@
+<?php
+
+include_once("pages/page.php");
+include_once("classes/file.php");
+
+class events extends page
+{
+	function events($db) {
+		//call parent ctor
+		$this->page();
+		$this->m_db = $db;
+		$this->m_pageType = "events";
+		
+		//we select or information here so block info will be ready before we
+		//get text
+		GLOBAL $config;
+		$catId = $config['catId'];
+		
+		$sql = "select id, title, pageUrl, data, hideLeftBlocks, hideRightBlocks, startDateTime, endDateTime, minUserLevel  from " . $config['tableprefix']. $this->m_pageType.  " where pageUrl = '" . $this->m_name . "'";
+
+		if($this->m_name != "index" && $this->m_name != "day")
+			$sql .= " and category = " . $catId;
+		
+		$this->m_db->runQuery($sql);
+		if($this->m_db->getNumRows() > 1)
+			echo "Error getting Events page contents";
+		else { 
+			$this->m_page = $this->m_db->getRowObject();
+//			if($this->m_name == "index")
+				$this->m_page->category = $catId;
+		}
+	}
+
+	function getDisplayText() {
+		GLOBAL $config;
+		if($_SESSION['userLevel'] >= $this->m_page->minUserLevel) {
+			if($this->m_name == "admin") {
+				if(isset($_POST['delete'])) {
+					$_POST['scrollPos'] = 0;
+					if(isset($_POST['confirm']))
+						$html .= $this->processAdmin();
+					else if(isset($_POST['deny'])) {
+						$html .= "<p>Delete Cancelled</p>\n";	
+						$html .= $this->admin();
+					} else {
+						$html .= $this->confirmDelete($this->m_pageType . "/admin.html");
+						return $html;
+					}
+				} else if(isset($_POST['cancel']) 
+					|| isset($_POST['submitadd'])
+					|| isset($_POST['submitedit'])) {
+					$_POST['scrollPos'] = 0;
+					$html .= $this->processAdmin();
+				} else {
+					$html .= $this->admin();
+				}
+			} else if($this->m_name == "index") {
+				$html .= $this->getCalendar();
+			} else if($this->m_name == "day") {
+				$html .= $this->getDay();
+			} else {
+				$html .= $this->getEvent();
+			}
+		} else { 
+			$html .= "<p>You do not have access to this events page...</p>\n";
+		}
+
+		return $html;
+	}
+
+	function getDay() {
+		GLOBAL $config;
+		$uri = $_SERVER["REQUEST_URI"];
+		$pos = strrpos($uri, '/');
+		$path = substr($uri, 1, $pos);
+
+			
+		$date  = $_GET['item'];
+		$dayBegin = substr($date, 0, 4) . "-" . substr($date, 4, 2) . "-" . substr($date, 6, 2) . " 00:00:00";
+		$dayEnd = substr($date, 0, 4) . "-" . substr($date, 4, 2) . "-" . substr($date, 6, 2) . " 23:59:59";
+		
+		$catCache = new catCache($this->m_db);
+		$catIds = $catCache->lineage($this->m_page->category, false, false);
+		$cat = new treeItems($this->m_db, "cat", "");
+		array_push($catIds, $this->m_page->category);
+		$catIdsString = implode(" or category = ", $catIds);
+
+		$sql = "select id, title, category, pageUrl, data, startDateTime, endDateTime, hideLeftBlocks, hideRightBlocks, minUserLevel  from " . $config['tableprefix']. $this->m_pageType . " where (startDateTime >= '" . $dayBegin . "' and startDateTime <= '" . $dayEnd . "') or(endDateTime >= '" . $dayBegin . "' and endDateTime <= '" . $dayEnd . "') and (category = ". $catIdsString . ");";
+
+		$fDate = date("F d, Y", strtotime($dayBegin));
+		$html = "<h3>$fDate</h3>";
+		if ($this->m_db->runQuery($sql) && $this->m_db->getNumRows() > 0) {
+			$numRows = $this->m_db->getNumRows();
+			$html .= "<div class=\"event\">\n";
+			for($row=0; $row<$numRows; ++$row) {
+				$event = $this->m_db->getRowObject();
+				$catPath = $cat->getItemPath($event->category);
+				$html .= "<div class=\"eventTitle\">" 
+					. "<h3>" 
+					. date("M d, h:i a", strtotime($event->startDateTime))
+					. " - "
+					. date("M d, h:i a", strtotime($event->endDateTime))
+					. "</h3>" 
+					. "<br />"
+					. "<a href=\"$path" . $catPath . $event->pageUrl . ".html\">" 
+					. $event->title	
+					. "</a>"
+					. "</div>";
+			}
+			$html .= "</div>\n";
+		} else {
+			$html .= "No events for this day.";
+		}
+		return $html;
+
+	}
+
+	function getEvent() {
+		$html = "<div><h3>" . $this->m_page->title . "</h3>" 
+			. date("M d, h:i a", strtotime($this->m_page->startDateTime))
+			. " - "
+			. date("M d, h:i a", strtotime($this->m_page->endDateTime))
+			. "</div>\n";
+				
+		$html .= "<p>" . $this->m_page->data . "</p>";
+
+		return $html;
+		
+	}
+
+	function getCalendar() {
+		GLOBAL $config;
+	//	$uri = $_SERVER["REQUEST_URI"];
+	//	$pos = strpos($uri, '/');
+	//	$path = substr($uri, 0, $pos);
+		$path = $this->m_pageType . "/";
+			
+		$timestamp = time();
+		$date = getdate ($timestamp);
+		$today = $date['mday'];
+
+		if(isset($_GET['item'])) {
+			$otherMonth = true;
+			$date  = $_GET['item'];
+			$year = substr($date, 0, 4);
+			$month = substr($date, 4, 2);
+		} else {
+			$otherMonth = false;
+			$curDay = getdate();
+			$year = $curDay['year'];
+			$month = $curDay['mon'];
+		}
+
+		$timestamp = mktime(0,0,0,$month,1,$year);
+		$date = getdate ($timestamp);
+		$dow = $date['wday'];
+
+		$numDays = 0;
+		if($month == 2) {
+			if(($year%4 == 0 && $year%100 != 0) ||  $year%400 == 0) //leap year.
+				$numDays = 29;
+			else
+				$numDays = 28;
+		} else if($mon%2 == 0) { //if even month
+			if($month < 8) //before Aug even months have 30 days, Aug and after they have 31
+				$numDays = 30;
+			else
+				$numDays = 31;
+		} else { //odd months
+			if($month < 8) //before Aug odd months have 31 days, Aug and after they have 30
+				$numDays = 31;
+			else
+				$numDays = 30;
+		}
+		//get events
+		//init storage
+		$events = array();
+		for($day=1; $day<=31; ++$day) {
+			$daysEvents = array();
+			array_push($events, $daysEvents);
+		}
+		//hold 32 days so we can just reference by day
+		$daysEvents = array();
+		array_push($events, $daysEvents);
+
+		
+		$sDate = $year . "-" . $month . "-" . "00 00:00:00";
+		$eDate = $year . "-" . $month . "-" . "31 23:59:59";
+
+		if($month == 1) {
+			$prevYM = $year-1 . "12";
+			$nextYM = $year . str_pad($month+1, 2, "0", STR_PAD_LEFT); 
+		} else if($month == 12) {
+			$prevYM = $year . str_pad($month-1, 2, "0", STR_PAD_LEFT); 
+			$nextYM = $year+1 . "01";
+		} else {
+			$prevYM = $year . str_pad($month-1, 2, "0", STR_PAD_LEFT); 
+			$nextYM = $year . str_pad($month+1, 2, "0", STR_PAD_LEFT); 
+		}
+
+		$catCache = new catCache($this->m_db);
+		$catIds = $catCache->lineage($this->m_page->category, false, false);
+		$cat = new treeItems($this->m_db, "cat", "");
+		array_push($catIds, $this->m_page->category);
+		$catIdsString = implode(" or category = ", $catIds);
+
+		$sql = "select id, title, category, pageUrl, data, startDateTime, endDateTime, hideLeftBlocks, hideRightBlocks, minUserLevel  from " . $config['tableprefix']. $this->m_pageType . " where startDateTime >= '" . $sDate . "' and startDateTime <= '" . $eDate . "' and (category = ". $catIdsString . ");";
+
+		if ($this->m_db->runQuery($sql) && $this->m_db->getNumRows() > 0) {
+			$numRows = $this->m_db->getNumRows();
+			for($row=0; $row<$numRows; ++$row) {
+				$event = $this->m_db->getRowObject();
+		
+				$startDate = explode(' ', $event->startDateTime);	
+				$endDate = explode(' ', $event->endDateTime);	
+				$datePartsStart = explode('-', $startDate[0]);
+				$datePartsEnd = explode('-', $endDate[0]);
+				$startDay = $datePartsStart[2];
+				$endDay = $datePartsEnd[2];
+				while($startDay <= $endDay) {	
+					array_push($events[(int)$startDay], $event);
+					++$startDay;
+				//	$myEvents = $events[$day];
+				}
+			}
+		}
+		
+		$fDate = date("F Y", mktime(0,0,0, $month, 1, $year));
+		$html = "<div class=\"calHeader\"><h3>$fDate</h3>";
+		$html .= "<div class=\"navButton left\">\n";
+		$html .= "<a href=\"" . $path . "disp_index_$prevYM" . ".html\">< Prev</a>";
+		$html .= "</div>";
+
+		$html .= "<div class=\"navButton right\">\n";
+		$html .= "<a href=\"" . $path . "disp_index_$nextYM" . ".html\">Next ></a>";
+		$html .= "</div>";
+		$html .= "<div class=\"clearer\">&nbsp;</div>\n";
+		$html .= "</div>";
+
+		$html .= "<div class=\"cal\">\n";
+
+		for($day=1; $day<=7; ++$day) {
+			$html .= "\t<div class=\"calDayOuter\">";
+			if($day === 1)
+				$html .= "\t<div class=\"calDayTitle calBorderLeft\"><h3>";
+			else 
+				$html .= "\t<div class=\"calDayTitle\"><h3>";
+			switch ($day) {
+			case 1:
+				$html .= "Sun.";
+				break;
+			case 2:
+				$html .= "Mon.";
+				break;
+			case 3:
+				$html .= "Tues.";
+				break;
+			case 4:
+				$html .= "Wed.";
+				break;
+			case 5:
+				$html .= "Thurs.";
+				break;
+			case 6:
+				$html .= "Fri.";
+				break;
+			case 7:
+				$html .= "Sat.";
+				break;
+			}
+			$html .= "</h3></div></div>\n";
+		}
+
+		for($day=1; $day<=$dow; ++$day) {
+			$html .= "\t<div class=\"calDayOuter\">";
+			if($day === 1)
+				$html .= "\t<div class=\"calDayInner calBorderLeft\">";
+			else 
+				$html .= "\t<div class=\"calDayInner\">";
+			$html .= "&nbsp</div></div>\n";
+		}
+
+		$sunday = 8-$dow;
+		if($sunday == 8)
+			$sunday = 1;
+		for($day=1; $day<=$numDays; ++$day) {
+			$html .= "\t<div class=\"calDayOuter\">";
+			$html .= "\t<div class=\"calDayInner ";
+			if($day == $today && !$otherMonth)
+				$html .= "calDayCur";
+			if($day == $sunday) {
+				$html .= " calBorderLeft";
+				$sunday += 7;
+			}
+			$daysEvents = $events[$day];
+			$tip = "No events scheduled for this day.";
+			$body = "";
+//		print_r($daysEvents);
+			if(sizeof($daysEvents) != 0) {
+				$tip = "<ul class=\"calDay\">\n";
+				$body ="<ul class=\"calDay\">\n";
+				/*
+				for($i=0; $i<sizeof($daysEvents); ++$i) {
+					$fStartTime = date("M d, h:i a", strtotime($daysEvents[$i]->startDateTime));
+					$fEndTime = date("M d, h:i a", strtotime($daysEvents[$i]->endDateTime));
+					$catPath = $cat->getItemPath($daysEvents[$i]->category);
+					$tip .= "<li>" .$daysEvents[$i]->title . "<br />" 
+						. "<h6>" . $fStartTime. " - <br />"
+						. $fEndTime . "</h6></li>\n";	
+					$body .= "<li>\n"
+						. "<a class=\"calTip\" href=\"$path" . $catPath . $daysEvents[$i]->pageUrl . ".html\">"
+						. substr($daysEvents[$i]->title, 0, 10) . "...<span>"
+						. $daysEvents[$i]->title 
+						. "<h6>" . $fStartTime . " - "
+						. $fEndTime . "</h6>"	
+						. "</span></a></li>\n";	
+				}*/
+				$body .= sizeof($daysEvents) . " Events\n";
+				$tip .= "</ul>\n";
+				$body .= "</ul>\n";
+				$tip .= "<h6>Click on the date for more info.</h6>\n";
+				if($day != $today)
+					$html .= " calDayWithItems";
+			}
+			$html .= "\">";
+
+			$html .= "<a class=\"calTip\" href=\"$path" 
+					. "disp_day_" 
+					. $year 
+					. str_pad($month, 2, "0", STR_PAD_LEFT) 
+					. str_pad($day, 2, "0", STR_PAD_LEFT) 
+					. ".html\">$day<span>$tip</span></a>";
+			$html .= $body;
+			$html .= "</div>\n";
+			$html .= "</div>\n";
+		}
+
+		for($day=$dow+$numDays; $day<35; ++$day) {
+			$html .= "\t<div class=\"calDayOuter\">";
+			$html .= "\t<div class=\"calDayInner\">";
+			$html .= "&nbsp</div></div>\n";
+		}
+
+		$html .= "<div class=\"clearer\">&nbsp;</div>\n";
+		$html .= "</div>\n";
+
+		return $html;
+	}
+
+	function getAdminSQL($title, $category) {
+		GLOBAL $config;
+		$sql = "select id, title, category, pageUrl, data, startDateTime, endDateTime, hideLeftBlocks, hideRightBlocks, minUserLevel  from " . $config['tableprefix']. $this->m_pageType . " where title = '" . addslashes($_POST[$title]) . "' and category = '". $_POST[$category] . "'";
+		
+		return $sql;
+	}	
+
+	function admin() {
+		GLOBAL $config;
+		GLOBAL $extraHead;
+		GLOBAL $bodyOnLoad;
+		
+
+		$extraHead .= "<script language=\"javascript\" type=\"text/javascript\" src=\"js/ts_picker.js\"></script>\n";
+		$tinymce = "<!-- tinyMCE -->\n";
+		$tinymce .= "<script language=\"javascript\" type=\"text/javascript\" src=\"/js/tiny_mce/tiny_mce.js\"></script>\n";
+		$tinymce .= "<script language=\"javascript\" type=\"text/javascript\">\ntinyMCE.init({mode : \"textareas\", theme : \"advanced\", content_css : \"/themes/" . $config['themeName'] . "/styletm.css\",\n";
+		$tinymce .= "plugins : \"advimage,emotions,contextmenu\",\n";
+		$tinymce .= "theme_advanced_buttons3_add : \"emotions\",\n";
+		//$tinymce .= "add_form_submit_trigger : \"false\",\n";
+		$tinymce .= "external_image_list_url : \"../js/myfiles/imgdd.js\",\n";
+		$tinymce .= "external_link_list_url : \"../js/myfiles/linkdd.js\"\n";
+		$tinymce .= "});\n</script>\n<!-- /tinyMCE -->\n";
+
+		$extraHead .= $tinymce;
+		$extraHead .= "<script language=\"javascript\" type=\"text/javascript\" src=\"themes/" . $config['themeName'] . "/scroller.js\"></script>\n";
+		$bodyOnLoad = "onload=\"scrollIt()\"";
+
+		$html = "<h3>Add/Edit Events Pages</h3>\n";
+
+		$html .= "<form id=\"addContent\" name=\"addContent\" method=\"post\" action=\"" . $this->m_pageType . "/admin.html\" onsubmit=\"setScrollPos();\">\n";
+	    $html .= "<input name=\"scrollPos\" type=\"hidden\" value=\"" . $_POST['scrollPos'] . "\"  />\n";
+		$categories = new treeItems($this->m_db, "cat","");		
+		$html .= $categories->getTreeItemsAndItemsForm($this);
+	
+		$this->processPostArray($activeFolder, $categories, 
+								$categories->getPostArray());
+
+		$categories->setType("parentCat");
+		$catHtml = $categories->getParentCatsForm($activeFolder, $this);
+	
+		$html .= "<p><font class=\"star\">*</font>indicates a required field</p>\n";
+		if(isset($_POST['updateId'])) {
+    		$html .= "<input name=\"updateId\" type=\"hidden\" value=\"" . $_POST['updateId'] ."\"  />\n";
+		}
+		$html .= "<div>\n";
+		$html .= "<div class=\"group\">\n";
+		$html .= "<div class=\"groupTitle\">Naming and Grouping</div>\n";
+		$html .= "<div class=\"formRow\">\n";
+		$html .= "\t<div class=\"formHeading\">\n";
+    	$html .= "\t\t<div>Title:<font class=\"star\">*</font></div>\n";
+		$html .= "\t</div>\n";
+		$html .= "\t<div class=\"formEntry\">\n";
+    	$html .= "\t\t<input name=\"title\" type=\"text\" value=\"" . $_POST['title'] ."\" maxlength=\"100\" size=\"60\" />\n";
+		$html .= "\t</div>\n";
+		$html .= "<div class=\"clearer\">&nbsp;</div>\n";
+		$html .= "</div>\n";
+		$html .= "<div class=\"formRow\">\n";
+		$html .= "\t<div class=\"formHeading\">\n";
+    	$html .= "\t\t<div>Category:<font class=\"star\">*</font></div>\n";
+		$html .= "\t</div>\n";
+		$html .= "\t<div class=\"formRowWhite\">\n";
+		$html .= $catHtml;
+		$html .= "\t</div>\n";
+		$html .= "</div>\n";
+		$html .= "</div>\n";
+
+		$html .= "<div class=\"group\">\n";
+		$html .= "<div class=\"groupTitle\">Scheduling</div>\n";
+		$html .= "<div class=\"formRow\">\n";
+		$html .= "\t<div class=\"formHeading\">\n";
+    	$html .= "\t\t<div>Event Date and Time:</div>\n";
+		$html .= "\t</div>\n";
+		$html .= "\t<div class=\"formEntry\">\n";
+    	$html .= "\t\t Start Date: <input name=\"eventDateStart\" type=\"text\" maxlength=\"12\" size=\"16\" value=\"" . $_POST['eventDateStart'] . "\" />\n";
+		$html .= "<a href=\"javascript:show_calendar('document.addContent.eventDateStart', document.addContent.eventDateStart.value);\"><img src=\"images/icons/cal.gif\" border=\"0\" alt=\"Pick date\"></a>";
+    	$html .= "\t\t End Date: <input name=\"eventDateEnd\" type=\"text\" maxlength=\"12\" size=\"16\" value=\"" . $_POST['eventDateEnd'] . "\" />\n";
+		$html .= "<a href=\"javascript:show_calendar('document.addContent.eventDateEnd', document.addContent.eventDateEnd.value);\"><img src=\"images/icons/cal.gif\" border=\"0\" alt=\"Pick date\"></a>";
+
+		$html .= "\t</div>\n";
+		$html .= "</div>\n";
+
+		$html .= "<div class=\"formRow\">\n";
+		$html .= "\t<div class=\"formHeading\">\n";
+		$html .= "\t</div>\n";
+		$html .= "\t<div class=\"formEntry\">\n";
+		$html .= "\t\t Start Time: <select name=\"eventTimeStartHour\">\n";
+		$isSelected = "";	
+		for($i=1; $i<=12; ++$i) {
+			if($_POST['eventTimeStartHour'] == $i)
+				$isSelected = "selected=\"true\"";	
+			$html .= "\t\t<option value=\"$i\" $isSelected>$i</option>\n";
+			$isSelected = "";	
+		}
+		$html .= "\t\t</select>\n";
+		$html .= "\t\t <select name=\"eventTimeStartMin\">\n";
+		$isSelected = "";	
+		for($i=0; $i<60; $i+=15) {
+			if($_POST['eventTimeStartMin'] == $i)
+				$isSelected = "selected=\"true\"";	
+			$html .= "\t\t<option value=\"$i\" $isSelected>" . str_pad($i, 2, '0') . "</option>\n";
+			$isSelected = "";	
+		}
+		$html .= "\t\t</select>\n";
+		$html .= "\t\t <select name=\"eventTimeStartAM\">\n";
+		$isSelected = "";	
+		if($_POST['eventTimeStartAM'] == 0)
+			$isSelected = "selected=\"true\"";	
+		$html .= "\t\t<option value=\"0\" $isSelected>AM</option>\n";
+		$isSelected = "";	
+		if($_POST['eventTimeStartAM'] == 1)
+			$isSelected = "selected=\"true\"";	
+		$html .= "\t\t<option value=\"1\" $isSelected>PM</option>\n";
+		$html .= "\t\t</select>\n";
+		
+		$html .= "\t\t End Time: <select name=\"eventTimeEndHour\">\n";
+		$isSelected = "";	
+		for($i=1; $i<=12; ++$i) {
+			if($_POST['eventTimeEndHour'] == $i)
+				$isSelected = "selected=\"true\"";	
+			$html .= "\t\t<option value=\"$i\" $isSelected>$i</option>\n";
+			$isSelected = "";	
+		}
+		$html .= "\t\t</select>\n";
+		$html .= "\t\t <select name=\"eventTimeEndMin\">\n";
+		$isSelected = "";	
+		for($i=0; $i<60; $i+=15) {
+			if($_POST['eventTimeEndMin'] == $i)
+				$isSelected = "selected=\"true\"";	
+			$html .= "\t\t<option value=\"$i\" $isSelected>" . str_pad($i, 2, '0') . "</option>\n";
+			$isSelected = "";	
+		}
+		$html .= "\t\t</select>\n";
+		$html .= "\t\t <select name=\"eventTimeEndAM\">\n";
+		$isSelected = "";	
+		if($_POST['eventTimeEndAM'] == 0)
+			$isSelected = "selected=\"true\"";	
+		$html .= "\t\t<option value=\"0\" $isSelected>AM</option>\n";
+		$isSelected = "";	
+		if($_POST['eventTimeEndAM'] == 1)
+			$isSelected = "selected=\"true\"";	
+		$html .= "\t\t<option value=\"1\" $isSelected>PM</option>\n";
+		$html .= "\t\t</select>\n";
+    	$html .= "\t\t<h6>Click calendar icon to pick dates and then select the times from the dropdowns.</h6>";
+		$html .= "\t</div>\n";
+		$html .= "</div>\n";
+		$html .= "</div>\n";
+
+		$html .= "<div class=\"group\">\n";
+		$html .= "<div class=\"groupTitle\">Event Description</div>\n";
+		$html .= "<div class=\"formRow\">\n";
+		$html .= "\t<div class=\"formHeading\">\n";
+    	$html .= "\t\t<div>Description:</div>\n";
+		$html .= "\t</div>\n";
+		$html .= "\t<div class=\"formEntry\">";
+    	$html .= "\t\t<div><textarea class=\"mce\" wrap=\"soft\" name=\"pageContent\" rows=\"20\">" . $_POST['pageContent'] . "</textarea></div>\n";
+		$html .= "\t</div>\n";
+		$html .= "</div>\n";
+		$html .= "<div class=\"formRow\">\n";
+		$html .= "\t<div class=\"formHeading\">\n";
+    	$html .= "\t\t<div>Toggle Image/Link Category Filter:</div>\n";
+		$html .= "\t</div>\n";
+		$html .= "\t<div class=\"formEntry\">";
+		$html .= "<input type=\"submit\" name=\"toggleImgFilter\" value=\"Toggle\" />\n";
+		$curCatOnly = $this->toggleImgFilterText($html);
+		
+		$file = new file();
+		$outPath = $_SERVER["DOCUMENT_ROOT"] . "/js/myfiles";
+		$file->createTinyMCEImageList("images", $outPath, $_POST['parentCatActive'], $curCatOnly);
+		$file->createTinyMCEContentList($this->m_db, $outPath, $_POST['parentCatActive'], $curCatOnly);
+
+
+		$html .= "\t</div>\n";
+		$html .= "</div>\n";
+		$html .= "</div>\n";
+		
+		$html .= "<div class=\"group\">\n";
+		$html .= "<div class=\"groupTitle\">Advanced</div>\n";
+		$html .= "<div class=\"formRow\">\n";
+		$html .= "\t<div class=\"formHeading\">\n";
+    	$html .= "\t\t<div>Block Hiding:</div>\n";
+		$html .= "\t</div>\n";
+		$html .= "\t<div class=\"formEntry\">\n";
+		$checkedLeft;	
+		if($_POST['hideLeftBlocks'] == 'on')
+			$checkedLeft = " checked=\"on\" ";
+    	$html .= "\t\t<input name=\"hideLeftBlocks\" type=\"checkbox\"";
+		$html .= "$checkedLeft>Hide Left Blocks</input>";
+		$checkedRight;	
+		if($_POST['hideRightBlocks'] == 'on')
+			$checkedRight = " checked=\"on\" ";
+    	$html .= "\t\t<input name=\"hideRightBlocks\" type=\"checkbox\" ";
+		$html .= "$checkedRight>Hide Right Blocks</input><br />";
+    	$html .= "\t\t<h6> Hide blocks for this page unless block is specified to be shown 'Always'.</h6>";
+		$html .= "\t</div>\n";
+		$html .= "<div class=\"clearer\">&nbsp;</div>\n";
+		$html .= "</div>\n";
+		$html .= "<div class=\"formRow\">\n";
+		$html .= "\t<div class=\"formHeading\">\n";
+    	$html .= "\t\t<div>Link Name:</div>\n";
+		$html .= "\t</div>\n";
+		$html .= "\t<div class=\"formEntry\">\n";
+    	$html .= "\t\t<input name=\"pageUrl\" type=\"text\" maxlength=\"100\" size=\"60\" value=\"" . $_POST['pageUrl'] . "\" /><br />\n";
+    	$html .= "\t\t<h6> Specify a nice name for that will be used as the link to this page.  Otherwise a name will be generated from the title.</h6>";
+		$html .= "\t</div>\n";
+		$html .= "<div class=\"clearer\">&nbsp;</div>\n";
+		$html .= "</div>\n";
+		$html .= "<div class=\"formRow\">\n";
+		$html .= "\t<div class=\"formHeading\">\n";
+    	$html .= "\t\t<div>Permissions:</div>\n";
+		$html .= "\t</div>\n";
+		$html .= "\t<div class=\"formEntry\">\n";
+    	$html .= "\t\t<select name=\"minUserLevel\">\n";
+		$isSelected = "";	
+		if($_POST['minUserLevel'] == 0)
+			$isSelected = "selected=\"true\"";	
+		$html .= "\t\t<option value=\"0\" $isSelected>Anonymous</option>\n";
+		$isSelected = "";	
+		if($_POST['minUserLevel'] == 1)
+			$isSelected = "selected=\"true\"";	
+		$html .= "\t\t<option value=\"1\" $isSelected>Registered User</option>\n";
+		$isSelected = "";	
+		if($_POST['minUserLevel'] == 2)
+			$isSelected = "selected=\"true\"";	
+		$html .= "\t\t<option value=\"2\" $isSelected>Content Administrator</option>\n";
+		$isSelected = "";	
+		if($_POST['minUserLevel'] == 3)
+			$isSelected = "selected=\"true\"";	
+		$html .= "\t\t<option value=\"3\" $isSelected>Site Administrator</option>\n";
+		$html .= "\t\t</select><br />\n";
+    	$html .= "\t\t<h6>Choose the minimum user level required for viewing this page.</h6>";
+		$html .= "\t</div>\n";
+		$html .= "</div>\n";
+		
+		$html .= "</div>\n";
+		$html .= "<input type=\"submit\" name=\"cancel\" value=\"Cancel\" />\n";
+		if(isset($_POST['updateId']))
+			$html .= "<input type=\"submit\" name=\"submitedit\" value=\"Submit Events Item Edit\" />\n";
+		else
+			$html .= "<input type=\"submit\" name=\"submitadd\" value=\"Add Events Item\" />\n";
+		$html .= "<input type=\"submit\" name=\"delete\" value=\"Delete Item\" />\n";
+		$html .= "</div>\n";
+		$html .= "</form>\n";
+
+		return $html;
+	}
+	
+	function processAdmin() {
+		GLOBAL $config;
+		if(isset($_POST['cancel'])) {
+			$html = "<p>Add/Edit cancelled.</p>";
+		} else if(isset($_POST['delete'])) {
+			$sql = "delete from " . $config['tableprefix'] . $this->m_pageType . " where id = '" . $_POST['updateId'] . "'";
+			if (!$this->m_db->runQuery($sql) || $this->m_db->getNumRowsAffected() != 1) {
+				$html = '<p>A database error occurred in processing your '.
+					"submission.\nIf this error persists, please ".
+					'contact us.</p>';
+			} else {
+				$html = "<p>Page deleted.</p>";
+				unset($_POST['updateId']);
+				unset($_POST['title']);
+				unset($_POST['category']);
+				unset($_POST['pageUrl']);
+				unset($_POST['pageContent']);
+				unset($_POST['hideLeftBlocks']);
+				unset($_POST['hideRightBlocks']);
+				unset($_POST['minUserLevel']);
+				unset($_POST['eventDateStart']);
+				unset($_POST['eventTimeStartHour']);
+				unset($_POST['eventTimeStartMin']);
+				unset($_POST['eventTimeStartAM']);
+				unset($_POST['eventDateEnd']);
+				unset($_POST['eventTimeEndHour']);
+				unset($_POST['eventTimeEndMin']);
+				unset($_POST['eventTimeEndAM']);
+			}
+		} else {
+			if($_POST['title'] == "") {
+				$html .= "<p>Please enter a title.</p>";
+			} else if($_POST['parentCatActive'] == "") {
+				$html .= "<p>Please select a parent category.</p>";
+			} else if($_POST['pageContent'] == "") {
+				$html .= "<p>Please enter content.</p>";
+			} else {
+				$title = addslashes(htmlspecialchars($_POST['title']));
+				$category = $_POST['parentCatActive'];
+				$duplicate = $this->m_db->isDuplicateName("title", $title, 
+						$config['tableprefix']."content", 
+						"category", $category);
+				if($duplicate) {
+					$html .= "<p>An item with the same title already exists in this category.\nPlease choose another title.</p>";
+				} else {
+					$pageContent = addslashes($_POST['pageContent']);
+					$hideLeftBlocks = 0;
+					if($_POST['hideLeftBlocks'] == 'on')
+						$hideLeftBlocks = 1;
+					$hideRightBlocks = 0;
+					if($_POST['hideRightBlocks'] == 'on')
+						$hideRightBlocks = 1;
+					$pageUrl = addslashes(htmlspecialchars($_POST['pageUrl']));
+					$minUserLevel = $_POST['minUserLevel'];
+
+					$pageUrl = $this->processPageUrl($pageUrl, title);
+
+					//events
+					$eventTimeStartHour = $_POST['eventTimeStartHour'];
+					$eventTimeEndHour = $_POST['eventTimeEndHour'];
+					if($_POST['eventTimeStartAM'] == 1) {
+						$eventTimeStartHour += 12;
+					}
+					if($_POST['eventTimeEndAM'] == 1) {
+						$eventTimeEndHour += 12;
+					}
+					$start = explode('/', trim($_POST['eventDateStart']));
+					$dateStrStart = $start[2]. "-" .  $start[0] . "-" . $start[1] . " " 
+						. $eventTimeStartHour . ":"	
+						. $_POST['eventTimeStartMin'];
+
+					$end = explode('/', trim($_POST['eventDateEnd']));
+					$dateStrEnd = $end[2]. "-" . $end[0] . "-" . $end[1] . " " 
+						. $eventTimeEndHour . ":"
+						. $_POST['eventTimeEndMin'];
+
+					$errored = false;	
+					if($_POST['submitadd']) {
+						$user = $config['dbuser'];	
+						$eventSql = "INSERT INTO ". $config['tableprefix'] . "events SET
+							title = '$title',
+								  pageUrl = '$pageUrl',
+								  category = '$category',
+								  data = '$pageContent',
+								  submitDateTime = NOW(),
+								  submitter = '$user',
+								  startDateTime = '$dateStrStart',
+								  endDateTime = '$dateStrEnd',
+								  hideLeftBlocks = '$hideLeftBlocks',
+								  hideRightBlocks = '$hideRightBlocks',
+								  minUserLevel = '$minUserLevel'";
+						$eventAdded = "Event Item $title added.";
+
+						if(!$this->m_db->runQuery($eventSql)) {
+							$html = '<p>A database error occurred in processing your '.
+								"submission.\nIf this error persists, please ".
+								'contact us.</p>';
+							$errored = true;
+						} else {
+							$html = "<p>$eventAdded</p>";
+							$_POST['updateId'] = $this->m_db->getLastInsertId();
+						}
+					} else {
+						$eventSql = "UPDATE ". $config['tableprefix'] . "events SET
+							title = '$title',
+								  pageUrl = '$pageUrl',
+								  category = '$category',
+								  data = '$pageContent',
+								  startDateTime = '$dateStrStart',
+								  endDateTime = '$dateStrEnd',
+								  hideLeftBlocks = '$hideLeftBlocks',
+								  hideRightBlocks = '$hideRightBlocks',
+								  minUserLevel = '$minUserLevel'
+									  where id = '" . $_POST['updateId'] . "'";
+
+						$eventUp = "Event Item $title updated.";
+						if (!$this->m_db->runQuery($eventSql)) {
+							$html = '<p>A database error occurred in processing your '.
+								"submission.\nIf this error persists, please ".
+								'contact us.</p>';
+							$errored = true;
+						} else {
+							$html = "<p>$eventUp</p>";
+						}
+					}
+				}
+			}
+		}
+
+		$html .= $this->admin();
+		return $html;
+	}
+	
+	function processTreeItemsFormPostArray($activeFolder, $postArray) {	
+			GLOBAL $config;
+			if($activeFolder != -1)
+				unset($_POST[$postArray['page']]);
+	
+			if(isset($_POST[$postArray['page']])) {
+				$activeFolder = $_POST[$postArray['active']];
+				$sql = $this->getAdminSQL($postArray['page'], $postArray['active']);
+				$this->m_db->runQuery($sql);
+				$editPage = $this->m_db->getRowObject();
+				$_POST['updateId'] = $editPage->id;
+				$_POST['title'] = $editPage->title;
+				$_POST['category'] = $editPage->category;
+				$_POST['pageUrl'] = $editPage->pageUrl;
+				$_POST['pageContent'] = $editPage->data;
+				$_POST['eventId'] = $editPage->eventId;
+
+				$dateTime = explode(' ', $editPage->startDateTime);	
+				$date = explode('-', $dateTime[0]);
+				$_POST['eventDateStart'] = $date[1]. "/" .  $date[2] . "/" . $date[0]; 
+				$time = explode(':', $dateTime[1]);
+				$_POST['eventTimeStartHour'] = (int)$time[0];
+				$_POST['eventTimeStartMin'] = (int)$time[1];
+				$_POST['eventTimeStartAM'] = 0;
+				if($_POST['eventTimeStartHour'] > 12) {
+					$_POST['eventTimeStartHour'] -= 12;
+					$_POST['eventTimeStartAM'] = 1;
+				}
+
+				$dateTime = explode(' ', $editPage->endDateTime);	
+				$date = explode('-', $dateTime[0]);
+				$_POST['eventDateEnd'] = $date[1]. "/" .  $date[2] . "/" . $date[0]; 
+				$time = explode(':', $dateTime[1]);
+				$_POST['eventTimeEndHour'] = (int)$time[0];
+				$_POST['eventTimeEndMin'] = (int)$time[1];
+				$_POST['eventTimeEndAM'] = 0;
+				if($_POST['eventTimeEndHour'] > 12) {
+					$_POST['eventTimeEndHour'] -= 12;
+					$_POST['eventTimeEndAM'] = 1;
+				}
+
+				if($editPage->hideLeftBlocks == 1)
+					$_POST['hideLeftBlocks'] = 'on';
+				if($editPage->hideRightBlocks == 1)
+					$_POST['hideRightBlocks'] = 'on';
+				$_POST['minUserLevel'] = $editPage->minUserLevel;
+			} else if(isset($_POST['newItem'])) {
+				unset($_POST['updateId']);
+				unset($_POST['title']);
+				unset($_POST['category']);
+				unset($_POST['pageUrl']);
+				unset($_POST['pageContent']);
+				unset($_POST['hideLeftBlocks']);
+				unset($_POST['hideRightBlocks']);
+				unset($_POST['minUserLevel']);
+				unset($_POST['eventDateStart']);
+				unset($_POST['eventTimeStartHour']);
+				unset($_POST['eventTimeStartMin']);
+				unset($_POST['eventTimeStartAM']);
+				unset($_POST['eventDateEnd']);
+				unset($_POST['eventTimeEndHour']);
+				unset($_POST['eventTimeEndMin']);
+				unset($_POST['eventTimeEndAM']);
+				$activeFolder = -1;
+			}
+
+		return $activeFolder;
+	}
+}
+
+?>

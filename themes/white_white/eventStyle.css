@@ -1,0 +1,204 @@
+.calHeader {
+	margin: 0px auto;
+	padding: 0px;
+  	width: 100%; 
+} 
+
+.eventAdminLink {
+	background: transparent;
+	border: 0px;
+	margin: 0px;
+	padding: 0px;
+	padding-right: 1px;
+	text-align: left;
+	font-size: 0.9em;
+	overflow: visible;
+	cursor: pointer;
+}
+
+.cal {
+	margin: 0px auto;
+	border-spacing: 0px;
+	padding: 0px;
+  	width: 100%; 
+}
+
+.calBorderLeft {
+	border-left: 1px solid #000000;
+}
+
+.calTitle {
+	width: 14.25%;
+	margin: 0px;
+	padding: 0px;
+	border-top: 1px solid #000000;
+	border-right: 1px solid #000000;
+	border-bottom: 1px solid #000000;
+}
+
+.calTitleRow {
+	background: #efefef;
+	margin: 0px;
+	padding: 0px;
+	text-align: center;
+	height: 20px;
+}
+
+.calDay {
+	width: 14.25%;
+	margin: 0px;
+	padding: 0px;
+	font-size: 0.9em;
+	border-right: 1px solid #000000;
+	border-bottom: 1px solid #000000;
+}
+
+.calDayRow {
+	background: #ffffff;
+	margin: 0px;
+	padding: 0px;
+	text-align: left;
+	vertical-align: top;
+	height: 100px;
+}
+
+.calDay ul {
+	font-size: 0.9em;
+	list-style: none;
+	padding-left: 1px;
+	margin: 1px;
+}
+
+a.calTip {
+	position: relative;
+	z-index: 24;
+	font-size: 1.0em;
+}
+
+a.calTip:hover {
+	z-index: 25;
+	background: #ffffff;
+}
+
+a.calTip span {
+	display: none;
+}
+
+a.calTip:hover span {
+	display: block;
+	position: absolute;
+	top: 20px; left: 20px;
+	width: 180px;
+	padding: 5px;
+	border: 1px solid #000000;
+	background: #efefef;
+	color: #000000;
+	text-align: left;
+}
+
+a.calTip ul {
+	list-style: circle;
+	padding-left: 16px;
+	margin: 0px;
+	font-size: 1.0em;
+}
+
+.calDayCur {
+	background: #cccccc;
+}
+
+.calDayWithItems {
+	background: #efefef;
+}
+
+/*event block rules*/
+.calBlockHeader {
+	width: 127px;
+	margin: 0px auto;
+	padding: 0px;
+} 
+
+.calBlock {
+  	width: 127px !important;
+	width /**/: 129px; 
+	margin: 0px auto;
+	padding: 0px;
+}
+
+.calBlockTitle {
+	font-size: 0.9em;
+	border-top: 1px solid #000000;
+	border-right: 1px solid #000000;
+	border-bottom: 1px solid #000000;
+	margin: 0px;
+	padding: 0px;
+	text-align: center;
+}
+.calBlockTitleRow {
+	background: #efefef;
+	margin: 0px;
+	padding: 0px;
+	text-align: center;
+	height: 16px;
+}
+
+.calBlockDay {
+	background: #ffffff;
+	border-right: 1px solid #000000;
+	border-bottom: 1px solid #000000;
+	margin: 0px;
+	padding: 0px;
+	height: 16px;
+	width: 17px;
+	text-align: center;
+}
+
+.calBlockDayRow {
+	background: #ffffff;
+	margin: 0px;
+	padding: 0px;
+	text-align: left;
+	vertical-align: top;
+}
+
+
+a.calBlockTip {
+	position: relative;
+	z-index: 24;
+}
+
+a.calBlockTip:hover {
+	z-index: 25;
+	background: #ffffff;
+}
+
+a.calBlockTip span {
+	display: none;
+}
+
+a.calBlockTip:hover span {
+	font-size: 1.2em;
+	display: block;
+	position: absolute;
+	top: 20px; right: 20px;
+	width: 180px;
+	padding: 5px;
+	border: 1px solid #000000;
+	background: #efefef;
+	color: #000000;
+	text-align: left;
+}
+
+a.calBlockTip ul {
+	list-style: circle;
+	padding-left: 16px;
+	margin: 0px;
+}
+
+.calBlockDayCur {
+	background: #cccccc;
+}
+
+.calBlockDayWithItems {
+	background: #efefef;
+}

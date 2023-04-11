@@ -1,0 +1,8 @@
+[14-Jul-2006 23:47:42] PHP Parse error:  syntax error, unexpected T_STRING, expecting ',' or ';' in /home/ttemple/public_html/classes/paypal.class.php on line 135
+[15-Jul-2006 11:51:57] PHP Parse error:  syntax error, unexpected T_STRING, expecting T_VARIABLE in /home/ttemple/public_html/classes/invoicer.php on line 5
+[15-Jul-2006 12:21:55] PHP Fatal error:  Call to a member function on a non-object in /home/ttemple/public_html/pages/paypal_quiet.php on line 129
+[15-Jul-2006 12:40:40] PHP Fatal error:  Call to a member function on a non-object in /home/ttemple/public_html/classes/invoicer.php on line 37
+[15-Jul-2006 12:59:22] PHP Fatal error:  Call to undefined function:  calculatebalance() in /home/ttemple/public_html/classes/invoicer.php on line 50
+[11-Aug-2006 09:42:45] PHP Parse error:  syntax error, unexpected '{' in /home/ttemple/public_html/classes/invoicer.php on line 131
+[11-Aug-2006 09:43:04] PHP Parse error:  syntax error, unexpected '{' in /home/ttemple/public_html/classes/invoicer.php on line 131
+[11-Aug-2006 10:13:29] PHP Parse error:  syntax error, unexpected '{' in /home/ttemple/public_html/classes/invoicer.php on line 131

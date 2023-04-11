@@ -1,0 +1,29 @@
+DirectoryIndex index.php
+
+Options +SymlinksIfOwnerMatch
+RewriteEngine On
+RewriteBase /
+#RewriteCond %{REQUEST_URI} !\.(exe|css|js|jpe?g|gif)$
+
+RewriteRule ^([^_]+)/([^_]+)/([^_]+)/([^_]+)/([^_]+).html$ index.php?page=$1&cat1=$2&cat2=$3&cat3=$4&name=$5 [L]
+RewriteRule ^([^_]+)/([^_]+)/([^_]+)/([^_]+).html$ index.php?page=$1&cat1=$2&cat2=$3&name=$4 [L]
+RewriteRule ^([^_]+)/([^_]+)/([^_]+).html$ index.php?page=$1&cat1=$2&name=$3 [L]
+RewriteRule ^([^_]+)/([^_]+).html$ index.php?page=$1&name=$2 [L]
+
+#for gallery, might work for other things too...
+#RewriteRule ^([^_]+)/([^_]+)/([^_]+)_([^_]+)_([^_]+).html#top$ index.php?page=$1&cat1=$2&name=$4&item=$5&action=$3 [L]
+RewriteRule ^([^_]+)/([^_]+)/([^_]+)/([^_]+)/([^_]+)_([^_]+)_([^_]+).html$ index.php?page=$1&cat1=$2&cat2=$3&cat3=$4&name=$6&item=$7&action=$5 [L]
+RewriteRule ^([^_]+)/([^_]+)/([^_]+)/([^_]+)_([^_]+)_([^_]+).html$ index.php?page=$1&cat1=$2&cat2=$3&name=$5&item=$6&action=$4 [L]
+RewriteRule ^([^_]+)/([^_]+)/([^_]+)_([^_]+)_([^_]+).html$ index.php?page=$1&cat1=$2&name=$4&item=$5&action=$3 [L]
+RewriteRule ^([^_]+)/([^_]+)_([^_]+)_([^_]+).html$ index.php?page=$1&name=$3&item=$4&action=$2 [L]
+
+RewriteRule ^([^_]+)/([^_]+)_([^_]+).html$ index.php?page=$1&name=$3&action=$2 [L]
+#RewriteRule ^([^_]+)/([^_]+)_([^_]+)_([^_]).html$ index.php?page=$1&name=$3&action=$2 [L]
+RewriteRule ^index.html$ index.php [L]
+RewriteRule ^412/$ index.php?page=content&cat1=412&name=front-page [L]
+RewriteRule ^412$ index.php?page=content&cat1=412&name=front-page [L]
+RewriteRule ^firstkids/$ index.php?page=content&cat1=firstkids&name=front-page [L]
+RewriteRule ^firstkids$ index.php?page=content&cat1=firstkids&name=front-page [L]
+RewriteRule ^([^_]+)/$ index.php?page=$1&name=index [L]
+
+

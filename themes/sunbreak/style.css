@@ -1,0 +1,773 @@
+html body  {
+color: #333333; 
+font-family: Arial,Helvetica,sans-serif; 
+font-size: 80%;  /*change this to resize all text.  text within classes specified with em */
+background: #000000 url("images/back.gif"); 
+margin: 3px;
+padding: 0px;
+}
+
+div table{
+font-size: 1.0em;
+}
+
+h1 {
+font-weight: bold;
+font-size: 1.8em;
+color: #dba248;
+margin: 0px;
+}
+
+h2 {
+font-weight: bold;
+font-size: 1.6em;
+color: #b25b0a; 
+font-style: italic;
+font-family: Georgia,Times,Arial,Helvetica,sans-serif; 
+margin: 0px;
+}
+
+h3 {
+font-weight: bold;
+font-size: 1.2em;
+color: #dba248;
+margin: 0px;
+}
+
+h4 {
+font-weight: bold;
+font-size: 1.2em;
+margin: 0px;
+}
+
+h5 {
+font-weight: bold;
+color: #dba248;
+font-style: italic;
+font-family: Georgia,Times,Arial,Helvetica,sans-serif; 
+margin-top: 5px;
+}
+
+h6 {
+font-size: 0.9em;
+font-weight: bold;
+margin: 0px;
+color: #dba248;
+}
+
+sub {
+	font-size: 0.8em;
+	color: #dba248;
+	margin: 0px;
+}
+
+a {
+	color: #b25b0a; 
+	text-decoration: none;
+	background: none;
+}
+
+a:hover {
+	color: #cccccc;
+	text-decoration: none;
+	background: none;
+}
+
+.bigbutton {
+	border-bottom: 1px solid #ffffff;
+	border-left: 1px solid #ffffff;
+	width: 400px;
+	height: 85px;
+	vertical-align: top;	
+}
+
+.solid {
+	border: 1px solid #000000;
+	width: 98%;
+}
+
+.dashed {
+	border: 1px dashed #000000;
+	width: 98%;
+}
+
+#outer {
+	width: 100%;
+	max-width:920px;
+	width:expression(document.body.clientWidth > 920? "920px": "auto" );
+	margin:0px auto;
+	padding:0px;
+	border: solid 1px #cccccc;
+	background: #ffffff; 
+}
+
+#header {
+	position: relative;
+	height: 162px;
+	margin: 0px
+	padding: 0px 0px 0px 0px;
+	background: #b25b0a; 
+
+}
+
+#preheader {
+	height: 22px;
+	margin: 0px;
+	padding: 0px 0px 0px 0px;
+	background: #611e27;
+}
+
+#headerName {
+	position: relative;
+	top: 20px;
+	left: 50%;
+	width: 300px;	
+	text-align: center;
+	z-index: 5;
+}
+
+.logo {
+	position: relative;
+	float: right;
+	bottom: 0px;
+	left: 0px;
+	width: 225px;
+	height: 160px;
+	z-index: 5;
+	border: solid 1px #cccccc;
+}
+
+#headerPicRand {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	width: 695px;
+	height: 160px;
+	background: #ffffff;
+	z-index: 0;
+	border: solid 1px #ffffff;
+}
+#headerPicRand img {
+	vertical-align:bottom;
+}
+
+
+#headerSlogan {
+	width: 100%;
+	height: 8px;
+	line-height: 8px;
+	margin:0px;
+	padding:0px;
+/*	background: #d8dcc5 url("images/hr.jpg") repeat-x;*/
+	background: #611e27;
+}
+
+#headerPics {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	width: 415px;
+	border-top: solid 1px #f9ba5b;
+	border-left: solid 1px #f9ba5b;
+	z-index: 0;
+}
+
+
+#headerPics1 {
+	float: left;
+}
+
+#headerPicsIn  {
+	border-bottom: solid 1px #f9ba5b;
+	border-right: solid 1px #f9ba5b;
+}
+
+#headerPics3 {
+	float: left;
+	border-bottom: solid 1px #f9ba5b;
+	border-right: solid 1px #f9ba5b;
+}
+#headerPics img {
+	vertical-align:bottom;
+}
+
+#hBlocks {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+}
+
+
+#main {
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+}
+
+#footer {
+	background: #611e27;
+	padding: 3px 5px 5px 3px;
+	margin: 0px; 
+	text-align: left;
+	font-size: 0.85em;
+}
+
+#footerMsg {
+	float: right;
+}
+
+#fBlocks {
+	float: left;
+}
+
+#content {
+	vertical-align: top;
+	margin: 0px;
+	padding: 0px 10px 0px 10px;
+/*	background: #ffffff url("images/hr.jpg") no-repeat;*/
+}
+
+#lBlocks {
+	width: 150px;
+	vertical-align: top;
+	margin: 0px;
+	padding: 10px 0px 10px 0px;
+	background: #611e27;
+}
+
+#rBlocks {
+	width: 140px;
+	vertical-align: top;
+	margin: 0px;
+	padding: 10px 0px 10px 0px;
+	background: transparent; 
+}
+/*
+#hmenu {
+	width: 400px;
+	line-height: 1;
+	font-weight: bold;
+	padding: 0px;
+	margin: 0px;
+	/*most of my margins are px, but since this specifies height of a div containing text set it with em*/
+/*
+}
+
+#hmenu ul {
+	float: left;
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+#hmenu li {
+	float: left;
+	/*width: 6em; must specify in em or doesn't apply*/
+/*
+}
+
+#hmenu a {
+	display: block;
+	color: #b85b3a; 
+	background: transparent;
+	text-decoration: none;
+	text-align: center;
+	padding: 5px 10px;
+	border: solid 1px #cccccc;
+}
+
+#hmenu a:hover {
+	background: #b85b3a; 
+	color: #d8dcc5;
+	border-top: solid 1px #cccccc;
+	border-left: solid 1px #cccccc;
+}
+*/
+
+#hmenu, #hmenu ul {
+	line-height: 1;
+	font-weight: bold;
+	padding: 0px;
+	margin: 0px;
+    list-style: none;
+}
+
+#hmenu a
+{
+	display: block;
+	text-decoration: none;
+	text-align: center;
+    position: relative;
+	color: #b85b3a; 
+	background: transparent;
+	padding: 5px 10px;
+}
+ 
+/*all list items*/
+#hmenu li
+{
+    float: left;
+    width: auto;
+	font-size: 0.9em;
+}
+
+#hmenu li:hover, #hmenu li.sfhover {
+	background: #dba248;
+}
+
+/*second level menu*/
+#hmenu li ul {
+    position: absolute;
+    width: auto;
+	margin-left: 20px;
+	background: #611e27;
+    left: -9994px;
+    padding: 2px;
+    z-index: 5;
+	border: solid 1px #dba248;
+}
+
+#hmenu li ul li {
+      float: none;
+      margin: 0px;
+      width: 160px;
+	height: 20px;
+	border: none;
+}
+
+#hmenu li ul li a {
+      margin: 0px;
+      width: auto;
+}
+
+/*third level menus an up*/
+#hmenu li ul ul
+{
+      left: -9994px;
+      position: absolute;
+      width: 160px;
+      padding: 2px;
+      margin: -20px 0px 0px 145px;
+}
+ 
+#hmenu li:hover ul ul, #hmenu li:hover ul ul ul, #hmenu li:hover ul ul ul ul, #hmenu li.sfhover ul ul, #hmenu li.sfhover ul ul ul, #hmenu li.sfhover ul ul ul ul {
+	left: -9994px;
+}
+
+#hmenu li:hover ul, #hmenu li li:hover ul, #hmenu li li li:hover ul, #hmenu li li li li:hover ul, #hmenu li.sfhover ul, #hmenu li li.sfhover ul, #hmenu li li li.sfhover ul, #hmenu li li li li.sfhover ul { /* lists nested under hovered list items */
+	left: auto;
+}
+
+/** Support for the "sfhover-fix.js" **/
+#hmenu iframe {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 0;
+/*	filter: progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=0);*/
+}
+
+.vmenu {
+	font-weight: bold;
+	padding: 0px;
+	margin: 0px;
+	font-size: 1.1em;
+}
+
+.vmenu ul {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+.vmenu li {
+	text-align: left;
+	padding: 0px;
+	padding-left: 1px;
+	width: 140px;
+	/*width: 6em; must specify in em or doesn't apply*/
+}
+
+.vmenu a {
+	display: block;
+	color: #333333;
+	background: #611e27;
+	text-decoration: none;
+	padding: 1px;
+}
+
+.vmenu a:hover {
+	background: #f9ba5b;
+	color: #333333;
+}
+/*second level*/
+.vmenu li ul li{
+	text-align: left;
+	padding-left: 8px;
+	width: 140px;
+	font-size: 0.90em;
+	/*width: 6em; must specify in em or doesn't apply*/
+}
+
+.fmenu a {
+	color: #333333;
+	background: #611e27;
+	text-decoration: none;
+}
+
+.fmenu a:hover {
+	background: #f9ba5b;
+	color: #333333;
+}
+
+.rBlockTitle {
+	font-weight: bold;
+	font-size: 1.2em;
+	color: #dba248;
+	margin-bottom: 3px;
+}
+	
+.rBlockText {
+	font-size: 0.9em;
+}
+
+.rBlock {
+	padding: 5px;
+	margin: 0px;
+}
+
+.clearer {
+	clear:both;
+	height:1px;
+	font-size:1px;
+	border:none;
+	margin:0; padding:0;
+	background:transparent;
+}
+
+/*item grouping theming*/
+
+.formRow {
+	margin-bottom: 5px;
+}
+
+.group {
+	position: relative;
+	background: #ffffff;
+	padding: 5px;
+	padding-top: 25px;
+	margin-bottom: 5px;
+	margin-top: 15px;
+	border: 1px solid #000000;
+	_height: 1%;
+
+}
+
+.groupTitle {
+	position: absolute;
+	top: -8px;
+	width: auto;
+	font-size: 1.2em;
+	text-align: center;
+	color: #dba248;
+	background: #ffffff;
+	padding: 3px;
+	padding-left: 20px;
+	padding-right: 20px;
+	border-top: 1px solid #ffffff;
+	border-right: 1px solid #cccccc;
+	border-bottom: 1px solid #cccccc;
+	border-left: 1px solid #ffffff;
+}
+
+.groupTitle a {
+	display: block;
+	color: #dba248;
+	text-decoration: none;
+}
+
+.groupTitle a:hover {
+	color: #3366cc;
+}
+
+
+.formHeading {
+	position: relative;
+	float: left;
+	width: 20%;
+	text-align: top;
+}
+
+.formEntry {
+	margin-left: 20%;
+}
+
+/*
+.formRowWhite {
+	background: #ffffff;
+	border-right: 1px solid #cccccc;
+	border-bottom: 1px solid #000000;
+	border-right: 1px solid #000000;
+	min-height: 120px;
+	max-height: 200px;
+	_height: 120px;
+	overflow: auto;
+}
+
+.formTree {
+	position: relative;
+	float: left;
+	padding: 5px;
+}
+.formList {
+	position: relative;
+	float: left;
+	padding: 5px;
+}
+*/
+.formRowWhite {
+    position: relative;
+    background: #ffffff;
+    border: 1px solid #cccccc;
+    border-bottom: 1px solid #000000;
+    border-right: 1px solid #000000;
+    height: 140px;
+}
+
+.formTree {
+    position: absolute;
+    left: 0px;
+    top: 1px;
+    width: 35%;
+    height: 130px;
+    overflow: auto;
+
+}
+
+.formTreeFull {
+    position: absolute;
+    left: 0px;
+    top: 1px;
+    width: 100%;
+    height: 130px;
+    overflow: auto;
+
+}
+
+.formList {
+    position: absolute;
+    right: 0px;
+    top: 1px;
+    width: 65%;
+    height: 130px;
+    overflow: auto;
+}
+
+input {
+	background: #fbfbfb;
+	border: 1px solid #cccccc;
+	border-bottom: 1px solid #000000;
+	border-right: 1px solid #000000;
+}
+
+.button {
+	background: transparent;
+	border: 0px;
+	margin: 0px;
+	padding: 0px;
+	padding-right: 1px;
+	text-align: left;
+	overflow: visible;
+}
+
+.activeButton {
+	background: transparent;
+	border: 0px;
+	margin: 0px;
+	padding: 0px;
+	padding-right: 1px;
+	color: #dba248;
+	font-weight: bold;
+	text-align: left;
+	overflow: visible;
+	
+}
+
+select {
+	background: #fbfbfb;
+	border: 1px solid #cccccc;
+}
+ textarea{
+	background: #fbfbfb;
+	border: 1px solid #cccccc;
+	border-bottom: 1px solid #000000;
+	border-right: 1px solid #000000;
+}
+
+textarea.mce {
+	width: 100%;
+}
+
+input.login {
+	width: 10em;
+}
+
+.star {
+	font-size: 1.4em;
+	color: #dba248;
+}
+
+.highlight {
+	font-size: 1.0em;
+	color: #dba248;
+}
+
+.headline {
+	background: #fbfbfb;
+	border: 1px solid #cccccc;
+	border-bottom: 1px solid #000000;
+	border-right: 1px solid #000000;
+	margin: 5px;
+	padding: 5px;
+}
+
+.headlineTitle {
+	margin-bottom: 5px;
+	border-bottom: 1px dashed #cccccc;
+	
+}
+.headlineTitle a {
+	font-size: 1.2em;
+	color: #dba248;
+	text-decoration: none;
+}
+
+.headlineTitle h6 {
+	font-weight: bold;
+	color: #333333; 
+}
+
+.headlineIcon {
+	float: left;
+	margin: 5px;
+}
+
+.event {
+	background: #fbfbfb;
+	border: 1px solid #cccccc;
+	border-bottom: 1px solid #000000;
+	border-right: 1px solid #000000;
+	margin: 5px;
+	padding: 5px;
+}
+
+.eventTitle {
+	margin-bottom: 5px;
+	border-bottom: 1px dashed #cccccc;
+	
+}
+
+.thumb {
+	margin-top: 3px;
+	margin-bottom: 4px;
+}
+
+.galleryImage {
+	margin: 5px;
+	margin-bottom: 2px;
+	padding: 5px;	
+	background: #fbfbfb;
+	border: 1px solid #cccccc;
+	border-bottom: 1px solid #000000;
+	border-right: 1px solid #000000;
+}
+
+p.thumb {
+	margin: 0px;
+	margin-left: 5px;
+	padding: 0px;	
+}
+
+div.thumb {
+	float: left;
+}
+
+
+.editSel {
+	background: #fbfbfb;
+	border: 1px solid #cccccc;
+	border-bottom: 1px solid #000000;
+	border-right: 1px solid #000000;
+	margin-left: 5px;
+	margin-right: 5px;
+	font-size: 0.9em;
+	width: 110px;
+}
+
+.navButton a {
+	display: block;
+	color: #dba248;
+	background: #611e27;
+	text-decoration: none;
+	text-align: center;
+	padding: 1px 10px;
+	margin: 1px;
+	font-size: 0.9em;
+	border: 1px solid #cccccc;
+	border-bottom: 1px solid #000000;
+	border-right: 1px solid #000000;
+}
+
+.navButton a:hover {
+	color: #d8dcc5;
+	background: #dba248;
+	border: 1px solid #000000;
+	border-bottom: 1px solid #cccccc;
+	border-right: 1px solid #cccccc;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.adminIconOuter {
+	float: left;
+	width: 20%;
+}
+
+.adminIconInner {
+	text-align: center;
+	margin: 0px auto;
+	margin-top: 15px;
+	padding: 0px;
+}
+
+
+.sitemap {
+	width: 100%;
+	margin: 0px auto;
+	padding: 0px;
+}
+
+.sitemapOuter {
+	float: left;
+	width: 50%;
+}
+
+.sitemapInner{
+	background: #fbfbfb;
+	border: 1px solid #cccccc;
+	border-bottom: 1px solid #000000;
+	border-right: 1px solid #000000;
+	margin: 5px;
+	padding: 5px;
+}
+
+.sitemapTitle {
+	margin-bottom: 5px;
+	border-bottom: 1px dashed #cccccc;
+}

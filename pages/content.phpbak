@@ -1,0 +1,327 @@
+<?php
+
+include_once("pages/page.php");
+include_once("classes/file.php");
+
+class content extends page
+{
+	function content($db) {
+		//call parent ctor
+		$this->page();
+		$this->m_db = $db;
+		$this->m_pageType = "content";
+
+		//we select or information here so block info will be ready before we
+		//get text
+		GLOBAL $config;
+		$catId = $this->parseCategoryUrl();
+		$sql = "select id, title, pageUrl, data, category, hideLeftBlocks, hideRightBlocks, minUserLevel  from " . $config['tableprefix']. $this->m_pageType.  " where pageUrl = '" . $this->m_name . "'";
+
+		if($this->m_name != "index") 
+			$sql .= " and category ='" . $catId . "'";
+		
+		$this->m_db->runQuery($sql);
+		if($this->m_db->getNumRows() > 1)
+			echo "Error getting page contents";
+		else { 
+			$this->m_page = $this->m_db->getRowObject();
+			if($this->m_name == "index")
+				$this->m_page->category = $catId;
+		}
+	}
+
+	function getDisplayText() {
+		if($_SESSION['userLevel'] >= $this->m_page->minUserLevel) {
+			if($this->m_name == "admin") {
+				if(isset($_POST['cancel'])
+					|| isset($_POST['submitadd'])
+					|| isset($_POST['submitedit'])
+					|| isset($_POST['delete']))
+					$html .= $this->processAdmin();
+				else
+					$html .= $this->admin();
+			} else if($this->m_name == "index") {
+				$html .= $this->getContentSiteMap();
+			} else {
+				if($this->m_page->showTitle)
+					$html .= "<h6>" . $this->m_page->title . "</h6>";
+				
+				$html .= $this->getDisplayPageText();
+			}
+		} else { 
+			$html .= "<p>You do not have access to this page...</p>\n";
+		}
+
+		return $html;
+	}
+
+	function getContentSiteMap() {
+		GLOBAL $config;
+		$html = "<h3>Site Map - Content Pages</h3>";
+		$html .= "<p>" . $this->m_page->data . "</p>";
+	
+		$cat = new treeItems($this->m_db, "cat", "");
+		$catIds = $cat->getItemChildren($this->m_page->category);
+		array_push($catIds, $this->m_page->category);
+		$catIdsString = implode(" or category = ", $catIds);
+		$sql = "select title, category, pageUrl, minUserLevel from " . $config['tableprefix']. $this->m_pageType . " where minUserLevel <= '" . $_SESSION['userLevel'] . "' and category = " . $catIdsString . " order by 'category' asc;";
+		if (!$this->m_db->runQuery($sql)) {
+    	  	$html .= "<p>A database error occurred retrieving site map</p>/n";
+		} else {
+			$catNum = 0;
+			$numRows = $this->m_db->getNumRows();
+			if($numRows > 0) {
+				$page = $this->m_db->getRowObject();
+				$prevCat = '';
+				for($i=0; $i<$numRows; ++$i) {
+					if($prevCat != $page->category) {
+						$lineage = $cat->getItemLineage($page->category);
+				
+						$catName = implode("/", $lineage);	
+						$html .= "<div class=\"sitemapOuter\">\n";
+						$html .= "<div class=\"sitemapInner\">\n";
+						$html .= "<div class=\"sitemapTitle\"><h3>" . $catName . "</h3></div>\n";
+						$html .= "<ul>\n";
+					}
+
+					$html .= "\t<li><a href=\"content/" . $page->pageUrl . ".html\">" . $page->title . "</a></li>\n";
+					if($i+1<$numRows) {
+						$prevCat = $page->category;
+						$page = $this->m_db->getRowObject();
+						if($prevCat != $page->category) {
+							$html .= "</ul></div></div>\n";
+							++$catNum;
+						}
+					} else {
+						$html .= "</ul></div></div>\n";
+						$catNum = 2; //force the last clearer
+					}
+
+					if($catNum == 2) {
+						$html .= "<div class=\"clearer\">&nbsp;</div>\n";
+						$catNum = 0;
+					}
+				}
+			}
+		}
+		
+		return $html;
+	}
+	
+
+	function getAdminSQL($title, $category) {
+		GLOBAL $config;
+		$sql = "select id, title, category, pageUrl, data, hideLeftBlocks, hideRightBlocks, minUserLevel  from " . $config['tableprefix']. $this->m_pageType . " where title = '" . $_POST[$title] . "' and category = '". $_POST[$category]. "';";
+	
+		return $sql;
+	}
+	
+	function admin() {
+		GLOBAL $config;
+		$file = new file();
+		$outPath = $_SERVER["DOCUMENT_ROOT"] . "/js/myfiles";
+		$file->createTinyMCEImageList("images", $outPath);
+
+		$html = "<h3>Add/Edit Content Pages</h3>\n";
+	
+		$html .= "<form id=\"addContent\" method=\"post\" action=\"" . $this->m_pageType . "/admin.html\">\n";
+		
+		$categories = new treeItems($this->m_db, "cat");		
+		$html .= $categories->getTreeItemsAndItemsForm($this);
+		
+		$this->processPostArray($activeFolder, $categories, 
+								$categories->getPostArray());
+
+		$categories->setType("parentCat");
+		$catHtml = $categories->getParentCatsForm($activeFolder, $this);
+		
+		$html .= "<p><font class=\"star\">*</font>indicates a required field</p>\n";
+		if(isset($_POST['updateId']))
+	    	$html .= "<input name=\"updateId\" type=\"hidden\" value=\"" . $_POST['updateId'] ."\"  />\n";
+		$html .= "<div>\n";
+		$html .= "<div class=\"group\">\n";
+		$html .= "<div class=\"groupTitle\">Naming and Grouping</div>\n";
+		$html .= "<div class=\"formRow\">\n";
+		$html .= "\t<div class=\"formHeading\">\n";
+    	$html .= "\t\t<div>Title:<font class=\"star\">*</font></div>\n";
+		$html .= "\t</div>\n";
+		$html .= "\t<div class=\"formEntry\">\n";
+    	$html .= "\t\t<input name=\"title\" type=\"text\" value=\"" . $_POST['title'] ."\" maxlength=\"100\" size=\"60\" />\n";
+    	$html .= "\t\t<input name=\"showTitle\" type=\"checkbox\">Show Title</input>\n";
+		$html .= "\t</div>\n";
+		$html .= "<div class=\"clearer\">&nbsp;</div>\n";
+		$html .= "</div>\n";
+		$html .= "<div class=\"formRow\">\n";
+		$html .= "\t<div class=\"formHeading\">\n";
+    	$html .= "\t\t<div>Category:<font class=\"star\">*</font></div>\n";
+		$html .= "\t</div>\n";
+		$html .= "\t<div class=\"formEntry\">\n";
+		$html .= $catHtml;
+		$html .= "\t</div>\n";
+		$html .= "</div>\n";
+		$html .= "</div>\n";
+		$html .= "<div class=\"group\">\n";
+		$html .= "<div class=\"groupTitle\">Page Content</div>\n";
+		$html .= "<div class=\"formRow\">\n";
+		$html .= "\t<div class=\"formHeading\">\n";
+    	$html .= "\t\t<div>Content:<font class=\"star\">*</font></div>\n";
+		$html .= "\t</div>\n";
+		$html .= "\t<div class=\"formEntry\">";
+    	$html .= "\t\t<div><textarea wrap=\"soft\" name=\"pageContent\" rows=\"30\" cols=\"70\">" . $_POST['pageContent'] . "</textarea></div>\n";
+		$html .= "\t</div>\n";
+		$html .= "</div>\n";
+		$html .= "</div>\n";
+		$html .= "<div class=\"group\">\n";
+		$html .= "<div class=\"groupTitle\">Advanced</div>\n";
+		$html .= "<div class=\"formRow\">\n";
+		$html .= "\t<div class=\"formHeading\">\n";
+    	$html .= "\t\t<div>Block Hiding:</div>\n";
+		$html .= "\t</div>\n";
+		$html .= "\t<div class=\"formEntry\">\n";
+		$checkedLeft;	
+		if($_POST['hideLeftBlocks'] == 'on')
+			$checkedLeft = " checked=\"on\" ";
+    	$html .= "\t\t<input name=\"hideLeftBlocks\" type=\"checkbox\"";
+		$html .= "$checkedLeft>Hide Left Blocks</input>";
+		$checkedRight;	
+		if($_POST['hideRightBlocks'] == 'on')
+			$checkedRight = " checked=\"on\" ";
+    	$html .= "\t\t<input name=\"hideRightBlocks\" type=\"checkbox\" ";
+		$html .= "$checkedRight>Hide Right Blocks</input><br />";
+    	$html .= "\t\t<h6> Hide blocks for this page unless block is specified to be shown 'Always'.</h6>";
+		$html .= "\t</div>\n";
+		$html .= "<div class=\"clearer\">&nbsp;</div>\n";
+		$html .= "</div>\n";
+		$html .= "<div class=\"formRow\">\n";
+		$html .= "\t<div class=\"formHeading\">\n";
+    	$html .= "\t\t<div>Link Name:</div>\n";
+		$html .= "\t</div>\n";
+		$html .= "\t<div class=\"formEntry\">\n";
+    	$html .= "\t\t<input name=\"pageUrl\" type=\"text\" maxlength=\"100\" size=\"60\" value=\"" . $_POST['pageUrl'] . "\" /><br />\n";
+    	$html .= "\t\t<h6> Specify a nice name for that will be used as the link to this page.  Otherwise a name will be generated from the title.</h6>";
+		$html .= "\t</div>\n";
+		$html .= "<div class=\"clearer\">&nbsp;</div>\n";
+		$html .= "</div>\n";
+		$html .= "<div class=\"formRow\">\n";
+		$html .= "\t<div class=\"formHeading\">\n";
+    	$html .= "\t\t<div>Permissions:</div>\n";
+		$html .= "\t</div>\n";
+		$html .= "\t<div class=\"formEntry\">\n";
+    	$html .= "\t\t<select name=\"minUserLevel\">\n";
+		$isSelected = "";	
+		if($_POST['minUserLevel'] == 0)
+			$isSelected = "selected=\"true\"";	
+		$html .= "\t\t<option value=\"0\" $isSelected>Anonymous</option>\n";
+		$isSelected = "";	
+		if($_POST['minUserLevel'] == 1)
+			$isSelected = "selected=\"true\"";	
+		$html .= "\t\t<option value=\"1\" $isSelected>Registered User</option>\n";
+		$isSelected = "";	
+		if($_POST['minUserLevel'] == 2)
+			$isSelected = "selected=\"true\"";	
+		$html .= "\t\t<option value=\"2\" $isSelected>Content Administrator</option>\n";
+		$isSelected = "";	
+		if($_POST['minUserLevel'] == 3)
+			$isSelected = "selected=\"true\"";	
+		$html .= "\t\t<option value=\"3\" $isSelected>Site Administrator</option>\n";
+		$html .= "\t\t</select><br />\n";
+    	$html .= "\t\t<h6>Choose the minimum user level required for viewing this page.</h6>";
+		$html .= "\t</div>\n";
+		$html .= "</div>\n";
+		
+		$html .= "</div>\n";
+		$html .= "<input type=\"submit\" name=\"cancel\" value=\"Cancel\" />\n";
+		if(isset($_POST['updateId']))
+			$html .= "<input type=\"submit\" name=\"submitedit\" value=\"Submit Page Edit\" />\n";
+		else
+			$html .= "<input type=\"submit\" name=\"submitadd\" value=\"Add New Page\" />\n";
+		$html .= "<input type=\"submit\" name=\"delete\" value=\"Delete Page\" />\n";
+		$html .= "</div>\n";
+		$html .= "</form>\n";
+
+		return $html;
+	}
+	
+	function processAdmin() {
+		GLOBAL $config;
+		if(isset($_POST['cancel'])) {
+			$html = "<p>Add/Edit cancelled.</p>";
+			$html .= $this->admin();
+		} else if(isset($_POST['delete'])) {
+			$sql = "delete from " . $config['tableprefix'] . $this->m_pageType . " where id = '" . $_POST['updateId'] . "'";
+			if (!$this->m_db->runQuery($sql)) {
+    	   		$html = '<p>A database error occurred in processing your '.
+        	   		  	 "submission.\nIf this error persists, please ".
+          			  	 'contact us.</p>';
+			} else {
+				$html = "<p>Page deleted.</p>";
+			}
+		} else {
+			if(!isset($_POST['parentCatActive'])) {
+				$html .= "<p>Please select a parent category.</p>";
+			} 
+			if(!isset($_POST['title'])) {
+				$html .= "<p>Please enter a title.</p>";
+			} 
+			if(!isset($_POST['pageContent'])) {
+				$html .= "<p>Please enter content.</p>";
+			} 
+			$title = addslashes(htmlspecialchars($_POST['title']));
+			$showTitle = addslashes(htmlspecialchars($_POST['showTitle']));
+			$category = $_POST['parentCatActive'];
+			$pageContent = addslashes($_POST['pageContent']);
+			$hideLeftBlocks = 0;
+			if($_POST['hideLeftBlocks'] == 'on')
+				$hideLeftBlocks = 1;
+			$hideRightBlocks = 0;
+			if($_POST['hideRightBlocks'] == 'on')
+				$hideRightBlocks = 1;
+			$pageUrl = addslashes(htmlspecialchars($_POST['pageUrl']));
+			$minUserLevel = $_POST['minUserLevel'];
+			
+			if($pageUrl == "") {
+				$pageUrl = ereg_replace(' ', '-', $title);
+				$pageUrl = strtolower($pageUrl);
+			}
+				
+			if($_POST['submitadd']) {	
+				$sql = "INSERT INTO ". $config['tableprefix'] . $this->m_pageType . " SET
+						title = '$title',
+						showTitle = '$showTitle',
+						pageUrl = '$pageUrl',
+						category = '$category',
+						data = '$pageContent',
+						hideLeftBlocks = '$hideLeftBlocks',
+						hideRightBlocks = '$hideRightBlocks',
+						minUserLevel = '$minUserLevel'";
+
+				$added = "Content page $title added.";
+			} else {
+				$sql = "UPDATE ". $config['tableprefix'] . $this->m_pageType . " SET
+						title = '$title',
+						showTitle = '$showTitle',
+						pageUrl = '$pageUrl',
+						category = '$category',
+						data = '$pageContent',
+						hideLeftBlocks = '$hideLeftBlocks',
+						hideRightBlocks = '$hideRightBlocks',
+						minUserLevel = '$minUserLevel'
+						where id = '" . $_POST['updateId'] . "'";
+
+				$added = "Content page $title updated.";
+			}
+			if (!$this->m_db->runQuery($sql)) {
+    	   		$html = '<p>A database error occurred in processing your '.
+        	   		  	 "submission.\nIf this error persists, please ".
+          			  	 'contact us.</p>';
+			} else {
+				$html = "<p>$added</p>";
+			}
+		}
+
+		$html .= $this->admin();
+		return $html;
+	}
+}
+
+?>

@@ -1,0 +1,628 @@
+html body  {
+color: #333333; 
+font-family: Arial,Helvetica,sans-serif; 
+font-size: 80%;  /*change this to resize all text.  text within classes specified with em */
+background: #faedeb;
+margin: 3px;
+padding: 0px;
+}
+
+div {
+font-size: 1.0em;
+}
+
+h1 {
+font-weight: bold;
+font-size: 1.8em;
+color: #cc4d33;
+margin: 0px;
+}
+
+h2 {
+font-weight: bold;
+font-size: 1.8em;
+color: #3366cc;
+font-style: italic;
+font-family: Georgia,Times,Arial,Helvetica,sans-serif; 
+margin: 0px;
+}
+
+h3 {
+font-weight: bold;
+font-size: 1.2em;
+color: #cc4d33;
+margin: 0px;
+}
+
+h4 {
+font-weight: bold;
+font-size: 1.2em;
+margin: 0px;
+}
+
+h5 {
+font-weight: bold;
+color: #cc4d33;
+font-style: italic;
+font-family: Georgia,Times,Arial,Helvetica,sans-serif; 
+margin: 0px;
+}
+
+h6 {
+font-weight: bold;
+margin: 0px;
+color: #cc4d33;
+}
+
+sub {
+	font-size: 0.8em;
+	color: #cc4d33;
+	margin: 0px;
+}
+
+a {
+	color: #3366cc; 
+	text-decoration: none;
+	background: none;
+}
+
+a:hover {
+	color: #cc4d33;
+	text-decoration: none;
+	background: none;
+}
+
+.solid {
+	border: 1px solid #000000;
+	width: 98%;
+}
+
+.dashed {
+	border: 1px dashed #3366cc;
+	width: 98%;
+}
+
+#outer {
+	width: 756px;
+	margin:0px auto;
+	padding:0px;
+	border: solid 1px #cccccc;
+	background: #ffffff; 
+	_height: 100%;
+}
+
+#header {
+	position: relative;
+	height: 130px;
+	margin: 5px 5px 0px 5px;
+	padding: 0px 5px 0px 5px;
+	border: solid 1px #000000;
+
+}
+
+#headerName {
+	float: right;
+	background: #faedeb;
+	padding: 5px;
+	margin-top: 5px;
+	text-align: center;
+	border-top: solid 1px #ccc;
+	border-right: solid 1px #000;
+	border-bottom: solid 1px #000;
+	border-left: solid 1px #ccc;
+}
+
+#headerSlogan {
+	float: right;
+	width: 115px;
+	text-align: center;
+	border: dashed 1px #3366cc;
+	background: #ffffff;
+}
+
+#headerPics {
+	position: absolute;
+	bottom: -8px;
+	border: solid 1px #000000;
+}
+
+#headerPics img {
+	vertical-align:bottom;
+}
+
+#hBlocks {
+	position: absolute;
+	bottom: -8px;
+	right: 5px;
+	width: 500px;
+}
+
+#main {
+	margin: 5px;
+	_height: 100%;
+}
+
+#mainRightBlocks {
+	background: #ffffff url("images/bg.gif") repeat;
+	margin: 0px;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+#footer {
+	background: #faedeb;
+	padding: 3px 5px 5px 3px;
+	margin: 0px 5px 5px 5px;
+	text-align: left;
+	font-size: 0.85em;
+	border: 1px solid #000000;
+}
+
+#footerMsg {
+	float: right;
+}
+
+#fBlocks {
+	float: left;
+}
+	
+
+#contentRightBlocks {
+	float: left;
+	margin: 0;
+	margin-top: 5px;
+	padding: 10px;
+	width: 600px;  /* box model hack */	
+	voice-family: "\"}\""; 
+	voice-family:inherit;
+	width: 580px;	 
+}
+
+html>#contentRightBlocks {
+	width: 580px;
+} 
+
+#content {
+	float: left;
+	margin: 0;
+	margin-top: 5px;
+	width: 100%;
+	height: 100%;
+}
+
+
+#rBlocks {
+	padding: 10px 10px 10px 0;
+	margin: 0 5px 0 610px;
+	background: transparent; 
+	/* compensates for IE Win bungling */
+	height: 100%;
+}
+
+.hmenu {
+	width: 500px;
+	line-height: 1;
+	font-weight: bold;
+	padding: 0px;
+	margin: 0px;
+	/*most of my margins are px, but since this specifies height of a div containing text set it with em*/
+}
+
+.hmenu ul {
+	float: right;
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+.hmenu li {
+	float: left;
+	/*width: 6em; must specify in em or doesn't apply*/
+}
+
+.hmenu a {
+	display: block;
+	color: #3366cc;
+	background: #faedeb;
+	text-decoration: none;
+	text-align: center;
+	padding: 5px 10px;
+	border-top: solid 1px #ffffff;
+	border-right: solid 1px #cccccc;
+	border-bottom: solid 1px #cccccc;
+	border-left: solid 1px #ffffff;
+}
+
+.hmenu a:hover {
+	color: #faedeb;
+	background: #3366cc;
+	border-top: solid 1px #cccccc;
+	border-left: solid 1px #cccccc;
+}
+
+.rBlockTitle {
+	font-weight: bold;
+	font-size: 1.2em;
+	color: #cc4d33;
+}
+	
+.rBlockText {
+	font-size: 0.85em;
+}
+
+.htmlBlock {
+	border-bottom: dashed 1px #3366cc;
+	padding: 5px;
+}
+
+.clearer {
+	clear:both;
+	height:1px;
+	font-size:1px;
+	border:none;
+	margin:0; padding:0;
+	background:transparent;
+}
+
+/*item grouping theming*/
+
+.formRow {
+	margin-bottom: 5px;
+}
+
+.group {
+	position: relative;
+	background: #faedeb;
+	padding: 5px;
+	padding-top: 25px;
+	margin-bottom: 5px;
+	margin-top: 15px;
+	border: 1px solid #000000;
+	_height: 1%;
+
+}
+
+.groupTitle {
+	position: absolute;
+	top: -8px;
+	/*width: 155px;*/
+	font-size: 1.2em;
+	text-align: center;
+	color: #cc4d33;
+	background: #ffffff;
+	padding: 3px;
+	border-top: 1px solid #faedeb;
+	border-right: 1px solid #cccccc;
+	border-bottom: 1px solid #cccccc;
+	border-left: 1px solid #faedeb;
+}
+
+.groupTitle a {
+	display: block;
+	color: #cc4d33;
+	text-decoration: none;
+}
+
+.groupTitle a:hover {
+	color: #3366cc;
+}
+
+
+.formHeading {
+	position: relative;
+	float: left;
+	width: 20%;
+}
+
+.formEntry {
+	margin-left: 20%;
+}
+
+
+.formRowWhite {
+	background: #ffffff;
+	border-right: 1px solid #cccccc;
+	border-bottom: 1px solid #000000;
+	border-right: 1px solid #000000;
+	min-height: 120px;
+	max-height: 200px;
+	_height: 120px;
+	overflow: auto;
+}
+
+.formTree {
+	position: relative;
+	float: left;
+	padding: 5px;
+}
+.formList {
+	position: relative;
+	float: left;
+	padding: 5px;
+}
+
+input {
+	background: #fbfbfb;
+	border: 1px solid #cccccc;
+	border-bottom: 1px solid #000000;
+	border-right: 1px solid #000000;
+}
+
+.button {
+	background: transparent;
+	border: 0px;
+	margin: 0px;
+	padding: 0px;
+	padding-right: 1px;
+	text-align: left;
+	overflow: visible;
+}
+
+.activeButton {
+	background: transparent;
+	border: 0px;
+	margin: 0px;
+	padding: 0px;
+	padding-right: 1px;
+	color: #cc4d33;
+	font-weight: bold;
+	text-align: left;
+	overflow: visible;
+	
+}
+
+select {
+n	background: #fbfbfb;
+	border: 1px solid #cccccc;
+}
+ textarea{
+	background: #fbfbfb;
+	border: 1px solid #cccccc;
+	border-bottom: 1px solid #000000;
+	border-right: 1px solid #000000;
+}
+
+input.login {
+	width: 10em;
+}
+
+.star {
+	font-size: 1.4em;
+	color: #cc4d33;
+}
+
+.highlight {
+	font-size: 1.0em;
+	color: #cc4d33;
+}
+
+.headline {
+	background: #fbfbfb;
+	border: 1px solid #cccccc;
+	border-bottom: 1px solid #000000;
+	border-right: 1px solid #000000;
+	margin: 5px;
+	padding: 5px;
+}
+
+.headlineTitle {
+	margin-bottom: 5px;
+	border-bottom: 1px dashed #cccccc;
+	
+}
+.headlineTitle a {
+	font-size: 1.2em;
+	color: #cc4d33;
+	text-decoration: none;
+}
+
+.headlineTitle h6 {
+	font-weight: bold;
+	color: #333333; 
+}
+
+.event {
+	background: #fbfbfb;
+	border: 1px solid #cccccc;
+	border-bottom: 1px solid #000000;
+	border-right: 1px solid #000000;
+	margin: 5px;
+	padding: 5px;
+}
+
+.eventTitle {
+	margin-bottom: 5px;
+	border-bottom: 1px dashed #cccccc;
+	
+}
+
+.thumb {
+	margin-top: 3px;
+	margin-bottom: 4px;
+}
+
+.galleryImage {
+	margin: 5px;
+	margin-bottom: 2px;
+	padding: 5px;	
+	background: #fbfbfb;
+	border: 1px solid #cccccc;
+	border-bottom: 1px solid #000000;
+	border-right: 1px solid #000000;
+}
+
+p.thumb {
+	margin: 0px;
+	margin-left: 5px;
+	padding: 0px;	
+}
+
+div.thumb {
+	float: left;
+}
+
+
+.editSel {
+	background: #fbfbfb;
+	border: 1px solid #cccccc;
+	border-bottom: 1px solid #000000;
+	border-right: 1px solid #000000;
+	margin-left: 5px;
+	margin-right: 5px;
+	font-size: 0.9em;
+	width: 110px;
+}
+
+.navButton a {
+	display: block;
+	color: #3366cc;
+	background: #ffffff;
+	text-decoration: none;
+	text-align: center;
+	padding: 1px 10px;
+	margin: 1px;
+	font-size: 0.9em;
+	border: 1px solid #cccccc;
+	border-bottom: 1px solid #000000;
+	border-right: 1px solid #000000;
+}
+
+.navButton a:hover {
+	color: #faedeb;
+	background: #3366cc;
+	border: 1px solid #000000;
+	border-bottom: 1px solid #cccccc;
+	border-right: 1px solid #cccccc;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.adminIconOuter {
+	float: left;
+	width: 20%;
+}
+
+.adminIconInner {
+	text-align: center;
+	margin: 0px;
+	margin-top: 15px;
+	padding: 0px;
+}
+
+.calHeader {
+	width: 700px;
+	margin: 0px auto;
+	padding: 0px;
+} 
+
+.cal {
+	width: 700px;
+	border-left: 1px solid #000000;
+	margin: 0px auto;
+	padding: 0px;
+}
+
+.calDayOuter {
+	float: left;
+	width: 100px;
+	margin: 0px;
+	padding: 0px;
+}
+
+.calDayTitle {
+	background: #faedeb;
+	border-top: 1px solid #000000;
+	border-right: 1px solid #000000;
+	border-bottom: 1px solid #000000;
+	margin: 0px;
+	padding: 0px;
+	text-align: center;
+	height: 20px;
+}
+
+.calDayInner {
+	background: #ffffff;
+	border-right: 1px solid #000000;
+	border-bottom: 1px solid #000000;
+	margin: 0px;
+	padding: 4px;
+	height: 92px;
+}
+
+.calDayInner ul {
+	list-style: circle;
+	padding-left: 16px;
+	margin: 0px;
+}
+
+
+a.calTip {
+	position: relative;
+	z-index: 24;
+}
+
+a.calTip:hover {
+	z-index: 25;
+	background: #ffffff;
+}
+
+a.calTip span {
+	display: none;
+}
+
+a.calTip:hover span {
+	display: block;
+	position: absolute;
+	top: 20px; left: 20px;
+	width: 180px;
+	padding: 5px;
+	border: 1px solid #000000;
+	background: #faedeb;
+	color: #000000;
+	text-align: left;
+}
+
+a.calTip ul {
+	list-style: circle;
+	padding-left: 16px;
+	margin: 0px;
+}
+
+.calDayCur {
+	background: #7a93c6;
+}
+
+.calDayWithItems {
+	background: #faedeb;
+}
+
+.sitemap {
+	width: 100%;
+	margin: 0px auto;
+	padding: 0px;
+}
+
+.sitemapOuter {
+	float: left;
+	width: 50%;
+}
+
+.sitemapInner{
+	background: #fbfbfb;
+	border: 1px solid #cccccc;
+	border-bottom: 1px solid #000000;
+	border-right: 1px solid #000000;
+	margin: 5px;
+	padding: 5px;
+}
+
+.sitemapTitle {
+	margin-bottom: 5px;
+	border-bottom: 1px dashed #cccccc;
+}
